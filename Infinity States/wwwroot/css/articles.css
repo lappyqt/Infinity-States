@@ -1,0 +1,10 @@
+.articleImg { width: 100%; }
+
+.articleTitle {
+    font-family: Inter, Segoe UI, sans-serif;
+    font-size: 24px;
+    font-weight: 500;
+    color: #000;
+    margin-top: 10px;
+    margin-bottom: 50px;
+}

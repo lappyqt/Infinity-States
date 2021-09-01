@@ -1,0 +1,24 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    @await Html.PartialAsync("CssPartial")
+    <title>Infinity States</title>
+</head>
+<body>
+    <header>
+        <div class="elements">
+            <span class="logo">Infinity States</span>
+
+            <div class="links">
+                <a href="/Articles" class="link">Articles<img src="~/img/compass.svg" alt="Icon" width="16" height="16" class="icon"></a>
+                <a href="/Editor" class="link">Editor<img src="~/img/plus.svg" alt="Icon" width="16" height="16" class="icon"></a>
+                <a href="/Account" class="link">Account<img src="~/img/profile.svg" alt="Icon" width="16" height="16" class="icon"></a>
+            </div>
+        </div>
+    </header>
+    @RenderBody()
+    @await Html.PartialAsync("ScriptsPartial")
+</body>
+</html>

@@ -1,0 +1,15 @@
+﻿<div class="textblock">
+    <img class="poster">
+    <p name="title" type="text" class="title"></p>
+    <pre class="content"></pre>
+</div>
+
+<a class="up">Up</a>
+
+<script type="text/javascript" src="~/js/articles.js"></script>
+<script>
+    setTimeout(() => document.title = title.textContent, 1);
+    window.onload = () => loadArticle();
+    window.addEventListener("scroll", onScroll);
+    up.addEventListener("click", scrollToTop);
+</script>
