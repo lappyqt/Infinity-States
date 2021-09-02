@@ -50,7 +50,7 @@ header .icon {
 header .link { color: #fff; }
 header .link:hover {color: #a5a5a5; transition: all 0.25s; }
 
-img { border-radius: 10px; }
+img { border-radius: 10px; max-height: 500px; }
 
 button {
     outline: none;
@@ -66,5 +66,7 @@ button {
 }
 
 button:hover { background-color: #303030; }
+
+button:disabled { background-color: #7a7a7a; }
 
 li { list-style: none; }

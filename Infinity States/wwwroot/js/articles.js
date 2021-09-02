@@ -45,11 +45,9 @@ function loadAllArticles() {
 
         const a = document.createElement("a");
         a.href = document.location.origin + "/Articles/Article?id=" + articles[i].id;
-        a.className = "articleTitle";
         a.innerHTML = articles[i].title;
 
         const p = document.createElement("p");
-        p.className = "articleTitle";
         p.appendChild(a);
 
         const li = document.createElement("li");

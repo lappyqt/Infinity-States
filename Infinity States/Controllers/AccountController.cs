@@ -24,6 +24,17 @@ namespace Infinity_States.Controllers
             return View("~/Views/Account/Account.cshtml");
         }
 
+        [HttpGet]
+        public List<Article> FindUserArticles()
+        {   
+            using (ApplicationContext db = new ApplicationContext())
+            {
+                var username = Request.Cookies["InfinityStates.Session.Username"];
+                var articles = from data in db.Articles where data.Author.Contains(username) select data;  
+                return articles.ToList();
+            }
+        }
+
         [HttpPost]
         public async Task<IActionResult> Logout()
         {

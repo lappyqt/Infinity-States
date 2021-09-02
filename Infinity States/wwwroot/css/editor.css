@@ -51,14 +51,6 @@ textarea::-webkit-scrollbar {
     width: 100px;
 }
 
-.articles {
-    margin-top: 30px;
-    width: 40%;
-    position: relative;
-    left: 50%;
-    margin-left: -20%;
-}
-
 .up {
     position: fixed;
     display: none;

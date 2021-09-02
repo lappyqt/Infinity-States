@@ -1,10 +1,47 @@
-.articleImg { width: 100%; }
+.articles {
+    margin-top: 30px;
+    width: 40%;
+    position: relative;
+    left: 50%;
+    margin-left: -20%;
+}
 
-.articleTitle {
+.articles img { width: 100%; height: auto; }
+
+.articles p {
     font-family: Inter, Segoe UI, sans-serif;
     font-size: 24px;
     font-weight: 500;
     color: #000;
     margin-top: 10px;
     margin-bottom: 50px;
+}
+
+.userArticlesList {
+	width: 40%;
+    margin-top: 30px;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, 0);
+}
+
+.userArticlesList span {
+    font-family: Lato, Inter, Segoe UI, sans-serif;
+    float: left;
+    margin-top: 3px;
+}
+
+.userArticlesList .logout {
+    position: absolute;
+    right: 0;
+}
+
+.logout button {
+	margin: 0;
+}
+
+.userArticlesList ul {
+    width: 100%;
+    position: relative;
+    top: 30px;
 }

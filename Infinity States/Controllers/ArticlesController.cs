@@ -35,14 +35,11 @@ namespace Infinity_States.Controllers
         [HttpGet]
         public string Read(int id)
         {
-            Article result;
-
             using (ApplicationContext db = new ApplicationContext())
             {
-                result = db.Articles.Find(id);
+                Article result = db.Articles.Find(id);
+                return result.Poster + "|" + result.Title + "|" + result.Content;    // "|" Separates result.Title from result.Content and result.Poster
             }
-
-            return result.Poster + "|" + result.Title + "|" + result.Content;    // "|" Separates result.Title from result.Content and result.Poster
         }
     }
 }
