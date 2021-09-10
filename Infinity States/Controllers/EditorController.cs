@@ -2,6 +2,7 @@
 using System;
 using Infinity_States.Models;
 using Microsoft.EntityFrameworkCore;
+using System.Threading.Tasks;
 
 namespace Infinity_States.Controllers
 {
@@ -13,14 +14,14 @@ namespace Infinity_States.Controllers
         }
         
         [HttpPost]
-        public IActionResult Publish(string poster, string title, string content)
+        public async Task<IActionResult> Publish(string poster, string title, string content)
         {
             var author = Request.Cookies["InfinityStates.Session.Username"];
             using (ApplicationContext db = new ApplicationContext())
             {
                 Article article = new Article { Poster = poster, Title = title, Content = content, Author = author };
                 db.Articles.Add(article);
-                db.SaveChanges();
+                await db.SaveChangesAsync();
             }
 
             return RedirectToAction("Index");

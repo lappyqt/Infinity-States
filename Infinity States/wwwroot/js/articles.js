@@ -10,13 +10,6 @@ function getArticleId() {
     return url.substring(url.lastIndexOf('=') + 1);
 }
 
-function httpGet(url, method = "Get", body = null) {
-    let xhttp = new XMLHttpRequest();
-    xhttp.open(method, url, false);
-    xhttp.send(body);
-    return xhttp.responseText; 
-}
-
 function loadArticle() {
     let url = "/Articles/Read?id=" + getArticleId();
     let data = httpGet(url);

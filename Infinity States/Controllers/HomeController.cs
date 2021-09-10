@@ -9,6 +9,8 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Http;
 
+using HashCode = Infinity_States.Models.HashCode;
+
 namespace Infinity_States.Controllers
 {
     public class HomeController : Controller
@@ -29,13 +31,13 @@ namespace Infinity_States.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(string mail, string username, string password)
+        public async Task<IActionResult> Create(string mail, string username, string password)
         {
             using (ApplicationContext db = new ApplicationContext())
             {
-                User user = new User { Mail = mail, Username = username, Password = password };
+                User user = new User { Mail = mail, Username = username, Password = HashCode.GenerateHashCode(password) };
                 db.Users.Add(user);
-                db.SaveChanges();
+                await db.SaveChangesAsync();
             }
 
             return RedirectToAction("Index");
@@ -48,7 +50,7 @@ namespace Infinity_States.Controllers
             {
                 User user = db.Users.Where(data => data.Username == username).FirstOrDefault();
 
-                if (user.Password == password) 
+                if (user.Password == HashCode.GenerateHashCode(password)) 
                 {
                     var claims = new List<Claim>
                     {

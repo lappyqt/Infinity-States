@@ -2,13 +2,6 @@ const form = document.querySelector(".form");
 
 const outputError = (text) => document.querySelector(".errorOutput").textContent = text; 
 
-function httpGet(url, method = "Get", body = null) {
-    let xhttp = new XMLHttpRequest();
-    xhttp.open(method, url, false);
-    xhttp.send(body);
-    return xhttp.responseText; 
-}
-
 function checkInputs() {
     let inputs = form.querySelectorAll("input.data");
 
@@ -22,15 +15,23 @@ function checkInputs() {
     return true;
 }
 
-function loadUserArticles() {
-    let response = JSON.parse(httpGet(window.location + "/FindUserArticles"));
+async function loadUserArticles() {
+    const response = await JSON.parse(httpGet(window.location + "/FindUserArticles"));
 
     for (let i = 0; i < response.length; i++) {
         const a = document.createElement("a");
+        a.href = "/Articles/Article?id=" + response[i].id;
 		a.innerText = response[i].title;
 
+        const deleteButton = document.createElement("a");
+        deleteButton.className = "delete";
+        deleteButton.innerText = "Delete";
+        deleteButton.href = "/Account/DeleteArticle?id=" + response[i].id;
+
 		const li = document.createElement("li");
+        li.className = "userArticle";
 		li.appendChild(a);
+        li.appendChild(deleteButton);
 
 		const ul = document.querySelector(".userArticles");
 		ul.appendChild(li);

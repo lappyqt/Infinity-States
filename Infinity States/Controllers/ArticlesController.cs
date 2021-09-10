@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 using Infinity_States.Models;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace Infinity_States.Controllers
 {
@@ -24,20 +26,20 @@ namespace Infinity_States.Controllers
         }
 
         [HttpGet]
-        public List<Article> GetAll()
+        public async Task <List<Article>> GetAll()
         {
             using (ApplicationContext db = new ApplicationContext())
-            {
-                return db.Articles.ToList();
+            {   
+                return await db.Articles.ToListAsync();
             }
         }
 
         [HttpGet]
-        public string Read(int id)
+        public async Task<string> Read(int id)
         {
             using (ApplicationContext db = new ApplicationContext())
             {
-                Article result = db.Articles.Find(id);
+                Article result = await db.Articles.FindAsync(id);
                 return result.Poster + "|" + result.Title + "|" + result.Content;    // "|" Separates result.Title from result.Content and result.Poster
             }
         }
