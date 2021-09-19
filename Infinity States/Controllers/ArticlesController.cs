@@ -20,6 +20,19 @@ namespace Infinity_States.Controllers
             return View("~/Views/Articles/Article.cshtml");
         }
 
+        public IActionResult Edit(int id)
+        {
+            using (ApplicationContext db = new ApplicationContext())
+            {
+                var article = db.Articles.Where(data => data.Id == id).FirstOrDefault();;
+                if (Request.Cookies["InfinityStates.Session.Username"] == article.Author)
+                {
+                    return View("~/Views/Articles/Edit.cshtml");
+                }
+                else return RedirectToAction("All");
+            }
+        }
+
         public IActionResult All()
         {
             return View("~/Views/Articles/All.cshtml");
@@ -33,14 +46,26 @@ namespace Infinity_States.Controllers
                 return await db.Articles.ToListAsync();
             }
         }
-
-        [HttpGet]
         public async Task<string> Read(int id)
         {
             using (ApplicationContext db = new ApplicationContext())
             {
                 Article result = await db.Articles.FindAsync(id);
                 return result.Poster + "|" + result.Title + "|" + result.Content;    // "|" Separates result.Title from result.Content and result.Poster
+            }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Update(string poster, string title, string content)
+        {
+            using (ApplicationContext db = new ApplicationContext())
+            {
+                var article = await db.Articles.Where(data => data.Title == title).FirstOrDefaultAsync();
+
+                article.Content = content;
+                article.Poster = poster;
+                await db.SaveChangesAsync();
+                return RedirectToAction("Index", "Account");
             }
         }
     }

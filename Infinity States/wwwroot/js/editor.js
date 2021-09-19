@@ -1,20 +1,12 @@
 ﻿const editor = document.querySelector(".editorForm");
-const content = document.querySelector(".content");
+const contentInput = document.querySelector(".content");
 
-window.addEventListener("load", loadDraft);
-window.addEventListener("beforeunload", saveDraft);
-
-content.addEventListener("input", autoGrow);
+contentInput.addEventListener("input", autoGrow);
 editor.addEventListener("submit", publish);
 
-function initialize() {
-    content.style.height = "auto";
-    content.rows = 10;
-}
-
 function autoGrow() {
-    content.style.height = "auto";
-    content.style.height = `${content.scrollHeight}px`;
+    contentInput.style.height = "auto";
+    contentInput.style.height = `${contentInput.scrollHeight}px`;
 }
 
 function publish() {
@@ -41,5 +33,3 @@ function loadDraft() {
     editor.elements[1].value = localStorage.getItem("title");
     editor.elements[2].value = localStorage.getItem("content");
 }
-
-initialize();

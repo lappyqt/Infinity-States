@@ -14,7 +14,7 @@ h2 {
 	position: absolute;
 	top: 50%;
 	left: 50%;
-	transform: translate(-50%, -60%);
+	transform: translate(-50%, -50%);
 }
 
 .main input {
@@ -56,3 +56,15 @@ h2 {
 }
 
 .errorOutput { position: relative; top: 10px; }
+
+@media screen and (max-width: 901px) {  /* Tablets */
+	h2 { margin-top: 100px; }
+	.back { margin-top: 15px; margin-left: 15px; }
+	.main { width: 450px; }
+}
+
+@media screen and (max-width: 501px) { /* Smartphones */
+	h2 { margin-top: 150px; }
+	.back { top: 10px; left: 10px; }
+	.main { width: 80%; margin-left: -12px; }
+}

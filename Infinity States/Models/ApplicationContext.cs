@@ -14,7 +14,7 @@ namespace Infinity_States.Models
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseNpgsql("Host = localhost; Port = 5432; Database = articles; Username = postgres; Password = adfQ312");
+            optionsBuilder.UseNpgsql("Host = localhost; Port = 5432; Database = ISData1; Username = postgres; Password = adfQ312");
         }
     }
 }

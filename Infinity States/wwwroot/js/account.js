@@ -24,14 +24,20 @@ async function loadUserArticles() {
 		a.innerText = response[i].title;
 
         const deleteButton = document.createElement("a");
-        deleteButton.className = "delete";
+        deleteButton.className = "linkButton";
         deleteButton.innerText = "Delete";
         deleteButton.href = "/Account/DeleteArticle?id=" + response[i].id;
+
+        const editButton = document.createElement("a");
+        editButton.className = "linkButton";
+        editButton.innerText = "Edit";
+        editButton.href = "/Articles/Edit?id=" + response[i].id;
 
 		const li = document.createElement("li");
         li.className = "userArticle";
 		li.appendChild(a);
         li.appendChild(deleteButton);
+        li.appendChild(editButton);
 
 		const ul = document.querySelector(".userArticles");
 		ul.appendChild(li);

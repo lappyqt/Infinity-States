@@ -56,6 +56,30 @@
 
 .userArticle:hover { background-color: #dedfe0; }
 
-.delete {
+.linkButton {
     float: right;
+    margin-left: 10px;
 }
+
+@media screen and (max-width: 901px) {  /* Tablets */
+    .articles {
+        width: 60%;
+        margin-left: -30%;
+    }
+
+    .userArticlesList {
+        width: 60%;
+    }
+}
+
+@media screen and (max-width: 501px) { /* Smartphones */
+    .articles {
+        width: 90%;
+        margin-left: -45%;
+    }
+
+    .userArticlesList {
+        width: 90%;
+    }
+}
+

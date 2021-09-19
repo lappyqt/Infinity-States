@@ -1,0 +1,14 @@
+<div class="textblock">
+    <form class="editorForm" method="post" action="/Articles/Update/">
+        <input name="poster" type="text" class="poster" placeholder="Poster url...">
+        <input name="title" type="text" class="title" placeholder="Title..."/>
+        <textarea name="content" class="content" rows="10" style="height: auto;" placeholder="Your text here..."></textarea>
+        <button type="submit" class="publish">Update</button>
+    </form>
+</div>
+<script type="application/javascript" src="~/js/editor.js"></script>
+<script type="application/javascript" src="~/js/articles.js"></script>
+<script>
+    setTimeout(() => document.title = editor.elements[1].value + "- Edit", 1);
+    window.onload = () => loadArticleWithEdit();
+</script>

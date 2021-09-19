@@ -1,3 +1,7 @@
+textarea::-webkit-scrollbar {
+    width: 0px;
+}
+
 .textblock {
     width: 40%;
     height: 100%;
@@ -23,10 +27,6 @@
     font-family: Inter, Segoe UI, sans-serif;
     font-size: 24px;
     font-weight: 600;
-}
-
-textarea::-webkit-scrollbar {
-    width: 0px;
 }
 
 .content {
@@ -55,6 +55,7 @@ textarea::-webkit-scrollbar {
 .publish {
     float: left;
     width: 100px;
+    margin-bottom: 100px;
 }
 
 .up {
@@ -67,4 +68,18 @@ textarea::-webkit-scrollbar {
     cursor: pointer;
     font-weight: 500;
     text-decoration: underline;
+}
+
+@media screen and (max-width: 901px) {  /* Tablets */
+    .textblock {
+        width: 50%;
+        margin-left: -25%;
+    }
+}
+
+@media screen and (max-width: 501px) { /* Smartphones */
+    .textblock {
+        width: 90%;
+        margin-left: -45%;
+    }
 }

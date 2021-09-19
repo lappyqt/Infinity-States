@@ -2,9 +2,13 @@
     <form class="editorForm" method="post" action="/Editor/Publish">
         <input name="poster" type="text" class="poster" placeholder="Poster url...">
         <input name="title" type="text" class="title" placeholder="Title..."/>
-        <textarea name="content" class="content" placeholder="Your text here..."></textarea>
+        <textarea name="content" rows="10" style="height: auto;" class="content" placeholder="Your text here..."></textarea>
         <button type="submit" class="publish">Publish</button>
         <button type="button" name="preview" class="publish">Preview</button>
     </form>
 </div>
 <script type="application/javascript" src="~/js/editor.js"></script>
+<script>
+    window.addEventListener("load", loadDraft);
+    window.addEventListener("beforeunload", saveDraft);
+</script>

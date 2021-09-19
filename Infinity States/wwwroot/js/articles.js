@@ -20,6 +20,16 @@ function loadArticle() {
     content.innerHTML = data[2];
 }
 
+function loadArticleWithEdit() {
+    let url = "/Articles/Read?id=" + getArticleId();
+    let data = httpGet(url);
+    data = data.split("|");
+    
+    poster.value = data[0];
+    title.value = data[1];
+    content.innerHTML = data[2];
+}
+
 function getAllArticles() {
     const url = document.location.origin + "/Articles/GetAll";
     const response = httpGet(url);

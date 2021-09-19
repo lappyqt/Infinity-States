@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Http;
 
 using HashCode = Infinity_States.Models.HashCode;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Infinity_States.Controllers
 {
