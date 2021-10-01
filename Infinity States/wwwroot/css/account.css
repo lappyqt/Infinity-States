@@ -1,7 +1,3 @@
-header {
-	display: none;
-}
-
 h2 {
 	font-family: Lato, Inter, Segoe UI, sans-serif;
 	font-weight: 700;
@@ -57,14 +53,75 @@ h2 {
 
 .errorOutput { position: relative; top: 10px; }
 
-@media screen and (max-width: 901px) {  /* Tablets */
+.userContainer {
+	width: 40%;
+	height: 100%;
+	position: relative;
+	top: 30px;
+	left: 50%;
+	bottom: 0;
+	margin-left: -20%;
+	padding-bottom: 30px;
+}
+
+.userData {
+	width: 100%;
+	height: 60px;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+
+.userData img {
+	width: 60px;
+	height: 60px;
+	border-radius: 30px;
+}
+
+.userData span {
+	font-family: Lato, Inter, Segoe UI, sans-serif;
+	font-size: 24px;
+	font-weight: 500;
+	margin-left: 20px;
+}
+
+.userData button {
+	width: 90px;
+	position: absolute;
+	right: 0;
+	margin-top: -16px;
+	margin-right: 0;
+}
+
+.contentChoose {
+	margin-top: 30px;
+	font-size: 18px;
+	font-weight: 500;
+	word-spacing: 5px;
+}
+
+.contentChoose span {
+	cursor: pointer;
+}
+
+.active {
+	color: #000;
+}
+
+.freeze {
+	color: #6B6B6B;
+}
+
+@media screen and (max-width: 901px) { /* Tablets */
 	h2 { margin-top: 100px; }
 	.back { margin-top: 15px; margin-left: 15px; }
 	.main { width: 450px; }
+	.userContainer { width: 60%; margin-left: -30%;}
 }
 
 @media screen and (max-width: 501px) { /* Smartphones */
 	h2 { margin-top: 150px; }
 	.back { top: 10px; left: 10px; }
 	.main { width: 80%; margin-left: -12px; }
+	.userContainer { width: 90%; margin-left: -45%;}
 }

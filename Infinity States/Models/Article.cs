@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 
@@ -15,6 +17,13 @@ namespace Infinity_States.Models
         [Required]
         public string Content { get; set; }
         [Required, MaxLength(150)]
+        public int AuthorId { get; set; }
+        [Required, MaxLength(150)]
         public string Author { get; set; }
+
+        public static implicit operator Article(List<Article> v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -65,6 +65,7 @@ namespace Infinity_States.Controllers
                         HttpOnly = true
                     };
 
+                    Response.Cookies.Append("InfinityStates.Session.Id", user.Id.ToString(), options);
                     Response.Cookies.Append("InfinityStates.Session.Username", user.Username, options);
 
                     var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);

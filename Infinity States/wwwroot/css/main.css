@@ -90,5 +90,5 @@ li { list-style: none; }
     header .elements { width: 90%; margin-left: -45%; }
     header .links { display: none; }
     header .menu { display: block; }
-    header img { border-radius: 0; position: relative; top: -2px; }
+    header img { border-radius: 0; position: relative; top: -2.5px; }
 } 

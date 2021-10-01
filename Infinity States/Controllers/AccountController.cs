@@ -22,7 +22,7 @@ namespace Infinity_States.Controllers
 
         public IActionResult Account()
         {
-            return View("~/Views/Account/Account.cshtml");
+            return View();
         }
         
         [HttpGet]
@@ -40,6 +40,7 @@ namespace Infinity_States.Controllers
         public async Task<IActionResult> Logout()
         {
             await HttpContext.SignOutAsync();
+            Response.Cookies.Delete("InfinityStates.Session.Id");
             Response.Cookies.Delete("InfinityStates.Session.Username");
             return RedirectToAction("Index", "Articles");
         }

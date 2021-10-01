@@ -15,11 +15,14 @@ namespace Infinity_States.Controllers
             return RedirectToAction("All");
         }
 
-        public IActionResult Article()
+        [Route("/articles/article/{*id}")]
+        [HttpGet]
+        public IActionResult Article(int id)
         {
-            return View("~/Views/Articles/Article.cshtml");
+            return View();
         }
 
+        [HttpGet]
         public IActionResult Edit(int id)
         {
             using (ApplicationContext db = new ApplicationContext())
@@ -27,7 +30,7 @@ namespace Infinity_States.Controllers
                 var article = db.Articles.Where(data => data.Id == id).FirstOrDefault();;
                 if (Request.Cookies["InfinityStates.Session.Username"] == article.Author)
                 {
-                    return View("~/Views/Articles/Edit.cshtml");
+                    return View();
                 }
                 else return RedirectToAction("All");
             }
@@ -35,7 +38,7 @@ namespace Infinity_States.Controllers
 
         public IActionResult All()
         {
-            return View("~/Views/Articles/All.cshtml");
+            return View();
         }
 
         [HttpGet]
@@ -46,24 +49,29 @@ namespace Infinity_States.Controllers
                 return await db.Articles.ToListAsync();
             }
         }
-        public async Task<string> Read(int id)
+
+        [Route("/articles/read/{*id}")]
+        [HttpGet]
+        public async Task<object> Read(int id)
         {
             using (ApplicationContext db = new ApplicationContext())
             {
-                Article result = await db.Articles.FindAsync(id);
-                return result.Poster + "|" + result.Title + "|" + result.Content;    // "|" Separates result.Title from result.Content and result.Poster
+                Article article = await db.Articles.FindAsync(id);
+                return article;
             }
         }
 
         [HttpPost]
-        public async Task<IActionResult> Update(string poster, string title, string content)
+        public async Task<IActionResult> Update(int id, string poster, string title, string content)
         {
             using (ApplicationContext db = new ApplicationContext())
             {
-                var article = await db.Articles.Where(data => data.Title == title).FirstOrDefaultAsync();
+                var article = await db.Articles.Where(data => data.Id == id).FirstOrDefaultAsync();
 
-                article.Content = content;
                 article.Poster = poster;
+                article.Title = title;
+                article.Content = content;
+
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index", "Account");
             }

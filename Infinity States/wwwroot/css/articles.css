@@ -6,7 +6,7 @@
     margin-left: -20%;
 }
 
-.articles img { width: 100%; height: auto; transition: all 0.2s;}
+.articles img { width: 100%; height: auto; transition: all 0.2s; background: #eee;}
 
 .articles p {
     font-family: Inter, Segoe UI, sans-serif;
@@ -14,6 +14,15 @@
     font-weight: 500;
     color: #000;
     margin-top: 10px;
+}
+
+.articles .authorLink {
+    font-weight: 500;
+    color: #5b5b5b;
+    padding: 1px;
+}
+
+.articles li {
     margin-bottom: 50px;
 }
 

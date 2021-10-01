@@ -1,0 +1,26 @@
+﻿<link rel="stylesheet" href="~/css/account.css">
+
+<div class="userContainer">
+    <div class="userData">
+        <img class="userAvatar" src="https://i.pinimg.com/originals/27/9d/60/279d60166aa6d25c9bf4fa4cd2f9f9eb.jpg" />
+        <span class="username"></span>
+
+        <form method="post" class="follow" action="">
+            <button type="submit">Follow</button>
+        </form>
+    </div>
+
+    <div class="contentChoose">
+        <span class="active">Articles</span>
+        <span class="freeze">Posts</span>
+    </div>
+</div>
+
+<div class="articles"><ul class="articlesList"></ul></div>
+<script type="text/javascript" src="~/js/account.js"></script>
+<script>
+window.onload = () => {
+    loadUserData();
+    getCurrentUserArticles();
+}
+</script>
