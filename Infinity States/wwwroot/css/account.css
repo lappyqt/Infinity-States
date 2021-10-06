@@ -112,7 +112,7 @@ h2 {
 	color: #6B6B6B;
 }
 
-@media screen and (max-width: 901px) { /* Tablets */
+@media screen and (max-width: 1001px) { /* Tablets */
 	h2 { margin-top: 100px; }
 	.back { margin-top: 15px; margin-left: 15px; }
 	.main { width: 450px; }

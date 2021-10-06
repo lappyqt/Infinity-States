@@ -54,7 +54,7 @@ textarea::-webkit-scrollbar {
 
 .publish {
     float: left;
-    width: 100px;
+    width: 90px;
     margin-bottom: 100px;
 }
 
@@ -70,10 +70,16 @@ textarea::-webkit-scrollbar {
     text-decoration: underline;
 }
 
-@media screen and (max-width: 901px) {  /* Tablets */
+.authorLink {
+    font-weight: 500;
+    color: #5b5b5b;
+    padding: 1px;
+}
+
+@media screen and (max-width: 1001px) {  /* Tablets */
     .textblock {
-        width: 50%;
-        margin-left: -25%;
+        width: 60%;
+        margin-left: -30%;
     }
 }
 

@@ -18,20 +18,33 @@ function checkInputs() {
 async function loadUserArticles() {
     const response = await (await fetch(window.location + "/FindUserArticles")).json();
 
-    for (let i = response.length - 1; i >= 0; i--) {
+    let i = response.length;
+    while (i--) {
+        const deleteIcon = document.createElement("img");
+        deleteIcon.className = "elementIcon";
+        deleteIcon.width = 16;
+        deleteIcon.height = 16;
+        deleteIcon.src = "../img/delete.svg";
+
+        const editIcon = document.createElement("img");
+        editIcon.className = "elementIcon";
+        editIcon.width = 16;
+        editIcon.height = 16;
+        editIcon.src = "../img/edit.svg";
+
         const a = document.createElement("a");
         a.href = "/Articles/Article/" + response[i].id;
 		a.innerText = response[i].title;
 
         const deleteButton = document.createElement("a");
         deleteButton.className = "linkButton";
-        deleteButton.innerText = "Delete";
         deleteButton.href = "/Account/DeleteArticle?id=" + response[i].id;
+        deleteButton.append(deleteIcon);
 
         const editButton = document.createElement("a");
         editButton.className = "linkButton";
-        editButton.innerText = "Edit";
         editButton.href = "/Articles/Edit/" + response[i].id;
+        editButton.append(editIcon);
 
 		const li = document.createElement("li");
         li.className = "userArticle";

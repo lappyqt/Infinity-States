@@ -47,6 +47,7 @@
 
 .logout button {
 	margin: 0;
+    width: 90px;
 }
 
 .userArticlesList ul {
@@ -70,7 +71,33 @@
     margin-left: 10px;
 }
 
-@media screen and (max-width: 901px) {  /* Tablets */
+.elementIcon { border-radius: 0; position: relative; top: 1px;}
+
+.filters {
+    overflow-x: scroll;
+    overflow-y: hidden;
+    white-space: nowrap;
+    width: 40%;
+    height: 36px;
+    position: relative;
+    top: 13.5px;
+    left: 50%;
+    margin-left: -20%;
+}
+
+.filters::-webkit-scrollbar { display: none; }
+
+.filter {
+    display: inline-block;
+    overflow-x: auto;
+    padding: 6px 10px;
+    border: 1.5px solid #000;
+    border-radius: 300px;
+    margin-right: 5px;
+    font-weight: 500;
+}
+
+@media screen and (max-width: 1001px) {  /* Tablets */
     .articles {
         width: 60%;
         margin-left: -30%;
@@ -78,6 +105,11 @@
 
     .userArticlesList {
         width: 60%;
+    }
+
+    .filters {
+        width: 60%;
+        margin-left: -30%;
     }
 }
 
@@ -89,6 +121,11 @@
 
     .userArticlesList {
         width: 90%;
+    }
+
+    .filters {
+        width: 90%;
+        margin-left: -45%;
     }
 }
 

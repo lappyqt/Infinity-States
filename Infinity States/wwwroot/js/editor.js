@@ -10,7 +10,7 @@ function autoGrow() {
 }
 
 function publish() {
-    if (editor.elements[1].value === "" && editor.elements[2].value === "") {
+    if (editor.elements[1].value === "" || editor.elements[2].value === "") {
         editor.action = "Editor";
         alert("Please enter a value");
     }

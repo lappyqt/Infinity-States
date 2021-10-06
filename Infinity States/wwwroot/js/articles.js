@@ -1,6 +1,7 @@
 const poster = document.querySelector(".poster");
 const title = document.querySelector(".title");
 const content = document.querySelector(".content");
+const authorLink = document.querySelector(".authorLink");
 const up = document.querySelector(".up");
 
 const scrollToTop = () => window.scrollTo({top: 0, behavior: "smooth"});
@@ -20,6 +21,9 @@ async function loadArticle() {
     poster.src = response.poster;
     title.textContent = response.title;
     content.innerHTML = response.content;
+
+    authorLink.innerHTML = response.author;
+    authorLink.href = `/Users/${response.authorId}`;
 }
 
 async function loadArticleWithEdit() {

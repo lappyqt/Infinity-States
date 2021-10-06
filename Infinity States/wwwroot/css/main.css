@@ -6,10 +6,13 @@
     font-family: Inter, Segoe UI, sans-serif;
 }
 
+a, span, button {
+    -webkit-tap-highlight-color: transparent;
+}
+
 a {
 	color: #000;
 	text-decoration: none;
-    -webkit-tap-highlight-color: transparent;
 }
 
 header {
@@ -78,6 +81,7 @@ button {
     font-weight: 500;
     font-size: 14px;
     margin-right: 10px;
+    min-width: 70px;
 }
 
 button:hover { background-color: #303030; }
@@ -86,7 +90,7 @@ button:disabled { background-color: #7a7a7a; }
 
 li { list-style: none; }
 
-@media screen and (max-width: 901px) {
+@media screen and (max-width: 1001px) {
     header .elements { width: 90%; margin-left: -45%; }
     header .links { display: none; }
     header .menu { display: block; }
