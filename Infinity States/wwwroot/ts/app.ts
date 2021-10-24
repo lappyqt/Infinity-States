@@ -1,9 +1,9 @@
-const domainName = window.origin;
-const currentUrl = document.location.href;
-const currentSearch = document.location.search; 
+const domainName: string = window.origin;
+const currentUrl: string = document.location.href;
+const currentSearch: string = document.location.search; 
 
 setTimeout(function () {
-    const menu = document.querySelector(".menu");
+    const menu: any = document.querySelector(".menu");
     menu.onclick = () => openMenu();
 }, 1);
 
@@ -15,9 +15,9 @@ function httpGet(url, method = "Get", body = null) {
 }
 
 function openMenu() {
-    const header = document.querySelector("header");
-    const links = document.querySelector(".links");
-    const logo = document.querySelector(".logo");
+    const header: any = document.querySelector("header");
+    const links: any = document.querySelector(".links");
+    const logo: any = document.querySelector(".logo");
 
     if (header.classList.contains("opened")) {
         header.classList.remove("opened");

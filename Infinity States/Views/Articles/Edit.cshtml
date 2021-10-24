@@ -7,10 +7,10 @@
         <button type="submit" class="publish">Update</button>
     </form>
 </div>
-<script type="application/javascript" src="~/js/editor.js"></script>
-<script type="application/javascript" src="~/js/articles.js"></script>
-<script type="text/javascript" hidden>
+
+<script type="text/javascript" src="~/build/app.js"></script>
+<script type="text/javascript">
     setTimeout(() => document.title = editor.elements[1].value + "- Edit", 10);
-    window.onload = () => loadArticleWithEdit();
+    window.onload = () => Article.LoadWithEdit();
     window.onsubmit = () => document.querySelector("#articleId").value = Number(loadArticleData().id);
 </script>

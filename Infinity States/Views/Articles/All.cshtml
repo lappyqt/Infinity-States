@@ -1,10 +1,9 @@
 ﻿<div class="filters">
-    <a href="#" class="filter">All articles</a>
-    <a href="#" class="filter">By followed authors</a>
-    <a href="#" class="filter">Trends</a>
-    <a href="#" class="filter">Popular authors</a>
+    <relay value="All articles" class="activeF"></relay>
+    <relay value="By followed authors" action="/Articles/ByFollowedAuthors"></relay>
 </div>
 
-<div class="articles"><ul class="articlesList"></ul></div>
-<script type="text/javascript" src="~/js/articles.js"></script>
-<script>window.onload = () => loadAllArticles();</script>
+<div class="articles">
+<ul class="articlesList"></ul></div>
+<script type="text/javascript" src="~/build/app.js"></script>
+<script>window.onload = () => loadArticles();</script>

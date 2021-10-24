@@ -42,11 +42,30 @@ namespace Infinity_States.Controllers
         }
 
         [HttpGet]
-        public async Task <List<Article>> GetAll()
+        public async Task<List<Article>> GetAll()
         {
             using (ApplicationContext db = new ApplicationContext())
             {   
                 return await db.Articles.ToListAsync();
+            }
+        }
+
+        [HttpGet]
+        public async Task<List<Article>> ByFollowedAuthors()
+        {
+            using (ApplicationContext db = new ApplicationContext())
+            {   
+                List<Article> resultList = new List<Article>();
+                var userId = Int32.Parse(Request.Cookies["InfinityStates.Session.Id"]);
+                User user = await db.Users.FindAsync(userId);
+
+                foreach (string author in user.Authors)
+                {
+                    Article article = await db.Articles.Where(data => data.Author == author).OrderBy(data => data.Id).LastOrDefaultAsync();
+                    resultList.Add(article);
+                } 
+
+                return resultList;
             }
         }
 

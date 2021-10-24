@@ -35,7 +35,7 @@
 }
 
 .userArticlesList span {
-    font-family: Lato, Inter, Segoe UI, sans-serif;
+    font-family: Inter, Segoe UI, sans-serif;
     float: left;
     margin-top: 3px;
 }
@@ -71,7 +71,7 @@
     margin-left: 10px;
 }
 
-.elementIcon { border-radius: 0; position: relative; top: 1px;}
+.elementIcon { border-radius: 0; position: relative; top: 1px; width: 16px; height: 16px;}
 
 .filters {
     overflow-x: scroll;
@@ -90,11 +90,17 @@
 .filter {
     display: inline-block;
     overflow-x: auto;
+    cursor: pointer;
     padding: 6px 10px;
     border: 1.5px solid #000;
     border-radius: 300px;
     margin-right: 5px;
     font-weight: 500;
+}
+
+.activeF {
+    background-color: #000;
+    color: #fff;
 }
 
 @media screen and (max-width: 1001px) {  /* Tablets */

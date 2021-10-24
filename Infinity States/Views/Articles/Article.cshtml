@@ -7,10 +7,9 @@
 
 <a class="up">Up</a>
 
-<script type="text/javascript" src="~/js/articles.js"></script>
+<script type="text/javascript" src="~/build/app.js"></script>
 <script>
-    setTimeout(() => document.title = title.textContent, 1);
-    window.onload = () => loadArticle();
+    window.onload = () => Article.Load();
     window.addEventListener("scroll", onScroll);
     up.addEventListener("click", scrollToTop);
 </script>

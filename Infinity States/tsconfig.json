@@ -1,0 +1,15 @@
+{
+  "compileOnSave": true,
+  "compilerOptions": {
+    "noImplicitAny": false,
+    "noEmitOnError": true,
+    "removeComments": true,
+    "sourceMap": false,
+    "alwaysStrict": true,
+    "target": "ES2021",
+    "outFile": "wwwroot/build/app.js"
+  },
+  "include": [
+    "wwwroot/ts/**/*"
+  ]
+}

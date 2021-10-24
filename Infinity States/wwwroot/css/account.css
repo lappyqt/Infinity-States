@@ -1,5 +1,5 @@
 h2 {
-	font-family: Lato, Inter, Segoe UI, sans-serif;
+	font-family: Inter, Segoe UI, sans-serif;
 	font-weight: 700;
 	text-align: center;
 	margin-top: 150px;
@@ -79,7 +79,7 @@ h2 {
 }
 
 .userData span {
-	font-family: Lato, Inter, Segoe UI, sans-serif;
+	font-family: Inter, Segoe UI, sans-serif;
 	font-size: 24px;
 	font-weight: 500;
 	margin-left: 20px;
@@ -110,6 +110,10 @@ h2 {
 
 .freeze {
 	color: #6B6B6B;
+}
+
+.followed {
+	background-color: #adadad;
 }
 
 @media screen and (max-width: 1001px) { /* Tablets */

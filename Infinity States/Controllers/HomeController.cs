@@ -36,7 +36,7 @@ namespace Infinity_States.Controllers
         {
             using (ApplicationContext db = new ApplicationContext())
             {
-                User user = new User { Mail = mail, Username = username, Password = HashCode.GenerateHashCode(password) };
+                User user = new User { Mail = mail, Username = username, Password = HashCode.GenerateHashCode(password), Authors = new List<string>() };
                 db.Users.Add(user);
                 await db.SaveChangesAsync();
             }

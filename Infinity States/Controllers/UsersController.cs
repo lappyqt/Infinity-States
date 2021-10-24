@@ -1,3 +1,4 @@
+using System;
 using Infinity_States.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Razor.TagHelpers;
@@ -13,6 +14,7 @@ namespace Infinity_States.Controllers
         [Route("/users/{*id}")]
         public IActionResult Index(int id)
         {
+            
             return View();
         }
 
@@ -23,7 +25,7 @@ namespace Infinity_States.Controllers
             using (ApplicationContext db = new ApplicationContext())
             {
                 User user = await db.Users.FindAsync(id);
-                User userPublicData = new User { Id = user.Id, Username = user.Username };
+                User userPublicData = new User { Id = user.Id, Mail = null, Username = user.Username, Password = null, Authors = null };
                 return userPublicData;
             }
         }
@@ -36,6 +38,21 @@ namespace Infinity_States.Controllers
             {
                 return await (from data in db.Articles where data.AuthorId == id select data).ToListAsync();
             }
+        }
+
+        [Route("/users/follow")]
+        [HttpPost]
+        public async Task <IActionResult> Follow(string author)
+        {
+            using (ApplicationContext db = new ApplicationContext())
+            {
+                int userId = Int32.Parse(Request.Cookies["InfinityStates.Session.Id"]);
+                User user = await db.Users.FindAsync(userId);
+
+                if (user.Authors.Contains(author) == false) user.Authors.Add(author);
+                await db.SaveChangesAsync();
+            }
+            return Redirect(Request.Headers["Referer"].ToString());
         }
     }
 }
