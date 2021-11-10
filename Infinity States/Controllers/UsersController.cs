@@ -12,21 +12,27 @@ namespace Infinity_States.Controllers
     public class UsersController : Controller
     {
         [Route("/users/{*id}")]
-        public IActionResult Index(int id)
-        {
-            
-            return View();
-        }
-
-        [Route("/users/data/{*id}")]
-        [HttpGet]
-        public async Task<object> Data(int id)
+        public async Task<IActionResult> Index(int id)
         {
             using (ApplicationContext db = new ApplicationContext())
             {
                 User user = await db.Users.FindAsync(id);
-                User userPublicData = new User { Id = user.Id, Mail = null, Username = user.Username, Password = null, Authors = null };
-                return userPublicData;
+                List<Article> userArticles = await db.Articles.OrderBy(data => -data.Id).Where(data => data.AuthorId == id).ToListAsync();
+
+                ViewBag.UserData = user;
+                ViewBag.UserArticles = userArticles;
+                return View();
+            }
+        }
+
+        [Route("/users/data/{*id}")]
+        [HttpGet]
+        public async Task<User> Data(int id)
+        {
+            using (ApplicationContext db = new ApplicationContext())
+            {
+                User user = await db.Users.FindAsync(id);
+                return user;
             }
         }
 
@@ -36,7 +42,7 @@ namespace Infinity_States.Controllers
         {
             using (ApplicationContext db = new ApplicationContext())
             {
-                return await (from data in db.Articles where data.AuthorId == id select data).ToListAsync();
+                return await db.Articles.Where(data => data.AuthorId == id).ToListAsync();
             }
         }
 

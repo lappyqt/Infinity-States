@@ -3,10 +3,28 @@
         <input name="poster" type="text" class="poster" placeholder="Poster url...">
         <input name="title" type="text" class="title" placeholder="Title..."/>
         <textarea name="content" rows="10" style="height: auto;" class="content" placeholder="Your text here..."></textarea>
+
+        <select name="category" class="category">
+            <option value="0">Other</option>
+            <option value="1">Technology</option>
+            <option value="2">Travel</option>
+            <option value="3">Education</option>
+            <option value="4">Gaming</option>
+        </select>
+
         <button type="submit" class="publish">Publish</button>
         <button type="button" name="preview" class="publish">Preview</button>
     </form>
+
+    <span class="message" style="display: none;">You are not logged into your account. <a class="link" href="/home/login">Please, Sign In.</a></span>
 </div>
+
+@if (ViewBag.Username == null) {
+    <script>
+        document.querySelector("button").disabled = true;
+        document.querySelector(".message").style.display = "block";
+    </script>
+}
 
 <script type="text/javascript" src="~/build/app.js"></script>
 <script>

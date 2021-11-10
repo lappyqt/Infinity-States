@@ -1,12 +1,14 @@
-﻿<link rel="stylesheet" href="~/css/account.css">
+﻿@using Infinity_States.Models;
+
+<link rel="stylesheet" href="~/css/account.css">
 
 <div class="userContainer">
     <div class="userData">
         <img class="userAvatar" src="https://sun9-12.userapi.com/impg/ghopVX_PziUqsn6hMAghyRGoWdSHyWd_-sR5jg/qftSJqfIxtU.jpg?size=320x320&quality=96&sign=2a3d547a727ad1f48e2ef1232e282367&type=album" />
-        <span class="username"></span>
+        <span class="username">@ViewBag.UserData.Username</span>
 
         <form method="post" class="follow" action="/Users/Follow">
-            <input type="hidden" name="author" class="author" />
+            <input type="hidden" name="author" value="@ViewBag.UserData.Username" class="author" />
             <button type="submit">Follow</button>
         </form>
     </div>
@@ -17,17 +19,16 @@
     </div>
 </div>
 
-<div class="articles"><ul class="articlesList"></ul></div>
+<div class="articles">
+    <ul class="articlesList">
+        @foreach (Article article in ViewBag.UserArticles)
+        {
+            <li>
+                <img class="articleImg" src="@article.Poster">
+                <p><a href="/Articles/Article/@article.Id">@article.Title</a></p>
+            </li>
+        }
+    </ul>
+</div>
 
 <script type="text/javascript" src="~/build/app.js"></script>
-<script>
-window.onload = () => {
-    loadUserData();
-    getCurrentUserArticles();
-}
-
-window.onsubmit = () => {
-    const username = document.querySelector(".username").innerText;
-    document.querySelector(".author").value = username;
-} 
-</script>

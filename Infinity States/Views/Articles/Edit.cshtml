@@ -1,16 +1,13 @@
+@{
+    ViewBag.Title = ViewBag.Article.Title + " - Edit";
+}
+
 <div class="textblock">
     <form class="editorForm" method="post" action="/Articles/Update/">
-        <input name="id" type="hidden" id="articleId" value="loadArticleData().id">
-        <input name="poster" type="text" class="poster" placeholder="Poster url...">
-        <input name="title" type="text" class="title" placeholder="Title..."/>
-        <textarea name="content" class="content" rows="10" style="height: auto;" placeholder="Your text here..."></textarea>
+        <input name="id" type="hidden" id="articleId" value="@ViewBag.Article.Id">
+        <input name="poster" type="text" class="poster" placeholder="Poster url..." value="@ViewBag.Article.Poster">
+        <input name="title" type="text" class="title" placeholder="Title..." value="@ViewBag.Article.Title">
+        <textarea name="content" class="content" rows="10" style="height: auto;" placeholder="Your text here...">@ViewBag.Article.Content</textarea>
         <button type="submit" class="publish">Update</button>
     </form>
 </div>
-
-<script type="text/javascript" src="~/build/app.js"></script>
-<script type="text/javascript">
-    setTimeout(() => document.title = editor.elements[1].value + "- Edit", 10);
-    window.onload = () => Article.LoadWithEdit();
-    window.onsubmit = () => document.querySelector("#articleId").value = Number(loadArticleData().id);
-</script>

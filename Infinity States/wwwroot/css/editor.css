@@ -76,6 +76,29 @@ textarea::-webkit-scrollbar {
     padding: 1px;
 }
 
+.category {
+    outline: none;
+    border: none;
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: 8px;
+    background-color: #000;
+    padding-left: 5px;
+    color: #fff;
+    width: 110px;
+    height: 33px;
+    position: relative;
+}
+
+.category:hover { cursor: pointer; } 
+
+.message {
+    margin-top: 15px;
+    position: absolute;
+}
+
+.message a { text-decoration: underline; font-weight: 500; }
+
 @media screen and (max-width: 1001px) {  /* Tablets */
     .textblock {
         width: 60%;

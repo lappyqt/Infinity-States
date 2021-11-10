@@ -7,6 +7,15 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Infinity_States.Models
 {
+    public enum ArticleCategories
+    {
+        Other,
+        Technology,
+        Travel,
+        Education,
+        Gaming
+    }
+
     public class Article
     {   
         [Key]
@@ -21,5 +30,7 @@ namespace Infinity_States.Models
         public int AuthorId { get; set; }
         [Required, MaxLength(150)]
         public string Author { get; set; }
+        [Required]
+        public ArticleCategories Category { get; set; }
     }
 }

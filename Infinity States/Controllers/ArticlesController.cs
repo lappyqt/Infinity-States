@@ -17,17 +17,23 @@ namespace Infinity_States.Controllers
 
         [Route("/articles/article/{*id}")]
         [HttpGet]
-        public IActionResult Article(int id)
-        {
-            return View();
-        }
-
-        [HttpGet]
-        public IActionResult Edit(int id)
+        public async Task<IActionResult> Article(int id)
         {
             using (ApplicationContext db = new ApplicationContext())
             {
-                var article = db.Articles.Where(data => data.Id == id).FirstOrDefault();;
+                ViewBag.Article = (Article) await db.Articles.FindAsync(id);
+                return View();
+            }
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Edit(int id)
+        {
+            using (ApplicationContext db = new ApplicationContext())
+            {
+                Article article = await db.Articles.FindAsync(id);
+                ViewBag.Article = article;
+
                 if (Request.Cookies["InfinityStates.Session.Username"] == article.Author)
                 {
                     return View();
@@ -36,9 +42,44 @@ namespace Infinity_States.Controllers
             }
         }
 
-        public IActionResult All()
+        [Route("/articles/all/{*page}")]
+        public async Task<IActionResult> All(int page = 1, int filter = -1)
         {
-            return View();
+            ViewData["filter"] = filter;
+
+            using (ApplicationContext db = new ApplicationContext())
+            {   
+                int pageSize = 50;
+
+                if (filter <= -1)
+                {
+                    IQueryable<Article> source = db.Articles.OrderBy(data => -data.Id);
+                    var count = await source.CountAsync();
+                    var items = await source.Skip((page - 1) * pageSize).Take(pageSize).ToListAsync();
+
+                    PageViewModel pageViewModel = new PageViewModel(count, page, pageSize);
+                    IndexViewModel viewModel = new IndexViewModel
+                    {
+                        PageViewModel = pageViewModel,
+                        Articles = items
+                    };
+                    return View(viewModel);
+                } 
+                else 
+                {
+                    IQueryable<Article> source = db.Articles.OrderBy(data => -data.Id).Where(data => data.Category == (ArticleCategories) filter);
+                    var count = await source.CountAsync();
+                    var items = await source.Skip((page - 1) * pageSize).Take(pageSize).ToListAsync();
+                    PageViewModel pageViewModel = new PageViewModel(count, page, pageSize);
+                    IndexViewModel viewModel = new IndexViewModel
+                    {
+                        PageViewModel = pageViewModel,
+                        Articles = items
+                    };
+                    return View(viewModel);
+                }
+
+            }
         }
 
         [HttpGet]
@@ -69,6 +110,15 @@ namespace Infinity_States.Controllers
             }
         }
 
+        [HttpGet]
+        public async Task<List<Article>> Filter(ArticleCategories value)
+        {
+            using (ApplicationContext db = new ApplicationContext())
+            {
+                 return await db.Articles.Where(data => data.Category == value).ToListAsync();
+            }
+        }
+
         [Route("/articles/read/{*id}")]
         [HttpGet]
         public async Task<object> Read(int id)
@@ -85,7 +135,7 @@ namespace Infinity_States.Controllers
         {
             using (ApplicationContext db = new ApplicationContext())
             {
-                var article = await db.Articles.Where(data => data.Id == id).FirstOrDefaultAsync();
+                var article = await db.Articles.FindAsync(id);
 
                 article.Poster = poster;
                 article.Title = title;

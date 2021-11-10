@@ -1,3 +1,5 @@
+@using Infinity_States.Models
+
 <div class="userArticlesList">
     <span class="title">Your Articles</span>
 
@@ -5,8 +7,16 @@
         <button type="submit">Logout</button>
     </form>
 
-    <ul class="userArticles"></ul>
+    <ul class="userArticles">
+        @foreach(Article article in ViewBag.Articles)
+        {
+            <li class="userArticle">
+                <a href="/Articles/Article/@article.Id">@article.Title</a>
+                <a class="linkButton" href="/Account/DeleteArticle?@article.Id"><img class="elementIcon" src="../img/delete.svg"></a>
+                <a class="linkButton" href="/Articles/Edit/@article.Id"><img class="elementIcon" src="../img/edit.svg"></a>
+            </li>
+        }
+    </ul>
 </div>
 
 <script type="text/javascript" src="~/build/app.js"></script>
-<script>window.addEventListener("load", loadUserArticles);</script>

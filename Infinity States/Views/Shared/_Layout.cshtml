@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     @await Html.PartialAsync("CssPartial")
     <script src="~/lib/vue/vue.min.js"></script>
-    <title>Infinity States</title>
+    <title>@ViewBag.Title</title>
 </head>
 <body>
     <header>
@@ -13,9 +13,9 @@
             <span class="logo">Infinity States</span>
 
             <div class="links">
-                <a href="/Articles" class="link">Articles<img src="~/img/compass.svg" alt="Icon" width="16" height="16" class="icon"></a>
-                <a href="/Editor" class="link">Editor<img src="~/img/plus.svg" alt="Icon" width="16" height="16" class="icon"></a>
-                <a href="/Account" class="link">Account<img src="~/img/profile.svg" alt="Icon" width="16" height="16" class="icon"></a>
+                <a href="/articles/all/" class="link">Articles<img src="~/img/compass.svg" alt="Icon" width="16" height="16" class="icon"></a>
+                <a href="/editor" class="link">Editor<img src="~/img/plus.svg" alt="Icon" width="16" height="16" class="icon"></a>
+                <a href="/account" class="link">Account<img src="~/img/profile.svg" alt="Icon" width="16" height="16" class="icon"></a>
             </div>
             <a class="link menu"><img src="~/img/menu.svg" width="24" height="24"></a>
         </div>

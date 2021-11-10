@@ -1,9 +1,40 @@
-﻿<div class="filters">
-    <relay value="All articles" class="activeF"></relay>
+﻿@using Infinity_States.Models
+@model IndexViewModel
+
+<div class="filters">
+    <a class="filter" href="/articles/all/">All Articles</a>
     <relay value="By followed authors" action="/Articles/ByFollowedAuthors"></relay>
+    <a class="filter" asp-route-filter="0">Other</a>
+    <a class="filter" asp-route-filter="1">Technology</a>
 </div>
 
 <div class="articles">
-<ul class="articlesList"></ul></div>
+    <ul class="articlesList">
+        @foreach (Article article in Model.Articles)
+        {
+            <li>
+                <img class="articleImg" src="@article.Poster">
+                <p><a href="/articles/article/@article.Id">@article.Title</a></p>
+                <a class="authorLink" href="/users/@article.AuthorId">@article.Author</a>
+            </li>
+        }
+    </ul>
+
+    <div class="pageControls">
+        @if (Model.PageViewModel.HasPreviousPage)
+        {
+           <a asp-action="All" class="pageControl" asp-route-page="@(Model.PageViewModel.PageNumber - 1)" asp-route-filter="@ViewData["filter"]">
+                Back
+           </a>
+        }
+
+        @if (Model.PageViewModel.HasNextPage)
+        {
+            <a asp-action="All" class="pageControl" asp-route-page="@(Model.PageViewModel.PageNumber + 1)" asp-route-filter="@ViewData["filter"]">
+                Forward
+            </a>
+        }
+    </div>
+</div>
+
 <script type="text/javascript" src="~/build/app.js"></script>
-<script>window.onload = () => loadArticles();</script>

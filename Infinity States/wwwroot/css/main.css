@@ -92,7 +92,7 @@ button {
 
 button:hover { background-color: #303030; }
 
-button:disabled { background-color: #7a7a7a; }
+button:disabled { text-decoration: line-through; cursor: default; }
 
 li { list-style: none; }
 

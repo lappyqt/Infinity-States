@@ -15,14 +15,14 @@ namespace Infinity_States.Controllers
     [Authorize]
     public class AccountController : Controller
     {
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
-        }
-
-        public IActionResult Account()
-        {
-            return View();
+            using (ApplicationContext db = new ApplicationContext())
+            {
+                string username = Request.Cookies["InfinityStates.Session.Username"];
+                ViewBag.Articles = await db.Articles.Where(data => data.Author == username).OrderBy(data => -data.Id).ToListAsync();
+                return View();
+            }
         }
         
         [HttpGet]
@@ -30,8 +30,8 @@ namespace Infinity_States.Controllers
         {   
             using (ApplicationContext db = new ApplicationContext())
             {
-                var username = Request.Cookies["InfinityStates.Session.Username"];
-                var articles = from data in db.Articles where data.Author.Contains(username) select data;  
+                string username = Request.Cookies["InfinityStates.Session.Username"];
+                var articles = from data in db.Articles where data.Author == username select data;  
                 return await articles.ToListAsync();
             }
         }
@@ -49,8 +49,8 @@ namespace Infinity_States.Controllers
         {
             using (ApplicationContext db = new ApplicationContext())
             {
-                var author = Request.Cookies["InfinityStates.Session.Username"];
-                var article = await db.Articles.Where(data => data.Id == id).FirstOrDefaultAsync();
+                string author = Request.Cookies["InfinityStates.Session.Username"];
+                Article article = await db.Articles.Where(data => data.Id == id).FirstOrDefaultAsync();
 
                 if (article.Author == author)
                 {

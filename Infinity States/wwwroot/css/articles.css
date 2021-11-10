@@ -96,11 +96,27 @@
     border-radius: 300px;
     margin-right: 5px;
     font-weight: 500;
+    transition: all 0.15s;
 }
 
-.activeF {
+.filter:hover {
     background-color: #000;
     color: #fff;
+}
+
+.pageControls {
+    float: right;
+}
+
+.pageControl {
+    border: 1.5px solid #000;
+    background-color: transparent;
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-weight: 500;
+    font-size: 14px;
+    margin-left: 10px;
+    min-width: 70px;
 }
 
 @media screen and (max-width: 1001px) {  /* Tablets */

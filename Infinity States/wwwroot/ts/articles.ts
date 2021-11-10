@@ -1,4 +1,4 @@
-const poster: any= document.querySelector(".poster");
+const poster: any = document.querySelector(".poster");
 const title: any = document.querySelector(".title");
 const content: any = document.querySelector(".content");
 const authorLink: any = document.querySelector(".authorLink");
@@ -11,7 +11,7 @@ var Vue: any = Vue;
 Vue.component("relay", {
     props: {
         "value": String,
-        "action": String 
+        "action": String
     },
 
     template: `

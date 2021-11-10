@@ -19,8 +19,8 @@ namespace Infinity_States
 
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddCookie(options => {
-                    options.LoginPath = "/Home/Login";
-                    options.LogoutPath = "/Account";
+                    options.LoginPath = "/home/login";
+                    options.LogoutPath = "/account";
                     options.Cookie.Name = "InfinityStates.Cookie";
                 });
         }

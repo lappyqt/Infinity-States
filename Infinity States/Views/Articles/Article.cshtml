@@ -1,7 +1,13 @@
-﻿<div class="textblock">
-    <img class="poster">
-    <p name="title" type="text" class="title"></p>
-    <a class="authorLink"></a>
+﻿@using Infinity_States.Models
+
+@{
+    ViewBag.Title = ViewBag.Article.Title;
+}
+
+<div class="textblock">
+    <img class="poster" src="@ViewBag.Article.Poster">
+    <p name="title" type="text" class="title">@ViewBag.Article.Title</p>
+    <a class="authorLink" href="/users/@ViewBag.Article.AuthorId">@ViewBag.Article.Author</a>
     <pre class="content"></pre>
 </div>
 
@@ -9,7 +15,9 @@
 
 <script type="text/javascript" src="~/build/app.js"></script>
 <script>
-    window.onload = () => Article.Load();
     window.addEventListener("scroll", onScroll);
     up.addEventListener("click", scrollToTop);
+    
+    content.innerHTML = "@ViewBag.Article.Content";
+    content.innerHTML = content.innerText;
 </script>
