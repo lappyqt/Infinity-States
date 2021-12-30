@@ -15,7 +15,7 @@ namespace Infinity_States.Controllers
         }
         
         [HttpPost]
-        public async Task<IActionResult> Publish(string poster, string title, string content, ArticleCategories category)
+        public async Task<IActionResult> Publish(string poster, string title, string content, int category)
         {
             using (ApplicationContext db = new ApplicationContext())
             {

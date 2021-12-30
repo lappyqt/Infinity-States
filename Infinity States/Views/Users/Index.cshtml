@@ -1,10 +1,8 @@
 ﻿@using Infinity_States.Models;
 
-<link rel="stylesheet" href="~/css/account.css">
-
-<div class="userContainer">
-    <div class="userData">
-        <img class="userAvatar" src="https://sun9-12.userapi.com/impg/ghopVX_PziUqsn6hMAghyRGoWdSHyWd_-sR5jg/qftSJqfIxtU.jpg?size=320x320&quality=96&sign=2a3d547a727ad1f48e2ef1232e282367&type=album" />
+<div class="user-container">
+    <div class="user-data">
+        <img class="user-avatar" src="https://i.pinimg.com/474x/b8/26/a9/b826a91631bfc1acee3da026167af466.jpg" />
         <span class="username">@ViewBag.UserData.Username</span>
 
         <form method="post" class="follow" action="/Users/Follow">
@@ -13,7 +11,7 @@
         </form>
     </div>
 
-    <div class="contentChoose">
+    <div class="content-choose">
         <span class="active">Articles</span>
         <span class="freeze">Posts</span>
     </div>
@@ -31,4 +29,10 @@
     </ul>
 </div>
 
-<script type="text/javascript" src="~/build/app.js"></script>
+@section scripts {
+    <script type="text/javascript" src="~/build/app.js"></script>
+}
+
+@section styles {
+    <link rel="stylesheet" type="text/css" href="~/css/layout/users.css">
+}

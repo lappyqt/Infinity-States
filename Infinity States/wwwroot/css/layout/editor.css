@@ -1,0 +1,232 @@
+textarea::-webkit-scrollbar {
+    width: 0px;
+}
+
+.textblock {
+    width: 40%;
+    height: 100%;
+    position: relative;
+    top: 30px;
+    left: 50%;
+    bottom: 0;
+    margin-left: -20%;
+}
+
+.poster {
+    width: 100%;
+    font-size: 16px;
+    margin-bottom: 20px;
+    border: none;
+    outline: none;
+}
+
+.title {
+    border: none;
+    outline: none;
+    width: 100%;
+    font-family: var(--font-title);
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.content {
+    border: none;
+    outline: none;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    width: 100%;
+    height: 59px;
+    white-space: pre-wrap;
+    font-size: 16px;
+    resize: none;
+}
+
+.content a {
+    text-decoration: underline;
+    font-weight: 500;
+}
+
+.content img {
+    width: 100%;
+    height: auto;
+    max-height: 550px;
+}
+
+.publish {
+    float: left;
+    width: 90px;
+    margin-right: 10px;
+}
+
+.up {
+    position: fixed;
+    display: none;
+    right: 10px; 
+    top: 95%; 
+    padding: 10px;
+    color: #000;
+    cursor: pointer;
+    font-weight: 500;
+    text-decoration: underline;
+}
+
+.author-link-edit {
+    font-weight: 500;
+    color: #5b5b5b;
+    padding: 1px;
+}
+
+.message {
+    margin-top: 50px;
+    position: absolute;
+}
+
+.message a { text-decoration: underline; font-weight: 500; }
+
+.disable-user-select {
+    user-select: none;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
+
+.container {
+    margin-left: 1rem;
+    margin-right: 1rem;
+}
+
+.modal {
+    height: 100%;
+    display: grid;
+    place-items: center;
+    font-size: 14px;
+}
+
+.modal button {
+    border: none;
+    outline: none;
+    padding: 0;
+    margin: 0;
+}
+
+.modal p {
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.modal-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-image: url('https://images.hdqwalls.com/download/magical-forest-pz-3840x2160.jpg');
+    background-size: cover;
+    background-position: center center;
+    width: 100%;
+    height: 100%;
+    display: grid;
+    align-items: flex-end;
+    overflow: hidden;
+    transition: all 0.7s;
+    z-index: 10;
+    visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
+}
+
+section .open {
+    pointer-events: all;
+    visibility: visible;
+    opacity: 1;
+}
+
+.modal-content {
+    position: relative;
+    background-color: #fff;
+    text-align: center;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.modal-content p {
+    font-family: var(--font-title);
+}
+
+.modal-content .modal-button {
+    cursor: pointer;
+    border: none;
+    background-color: #000;
+    color: #fff;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-weight: 500;
+    font-size: 14px;
+    width: 200px;
+    margin-top: 40px;
+}
+
+.modal-content .modal-button:hover {
+    background-color: #303030;
+}
+
+.modal-content .modal-close-button {
+    cursor: pointer;
+    background: transparent;
+    border: none;
+    color: #000;
+    font-size: 14px;
+    font-weight: 500;
+    margin-top: 10px;
+}
+
+.categories {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.categories input[type=radio] {
+    display: none;
+}
+
+.categories input[type=radio]:checked + label {
+    transition: all 0.3s;
+    background: #000;
+    color: #fff;
+}
+
+.categories label {
+    display: inline-flexbox;
+    cursor: pointer;
+    padding: 5px 16px;
+    font-weight: 500;
+    background-color: transparent;
+    color: #000;
+    border: 1.5px solid #000;
+    border-radius: 30px;
+    margin-top: 10px;
+    margin-right: 10px;
+}
+
+@media screen and (min-width: 576px) {
+    .modal-content {
+        margin: auto;
+        width: 400px;
+    }
+}
+
+@media screen and (max-width: 1001px) {  /* Tablets */
+    .textblock {
+        width: 60%;
+        margin-left: -30%;
+    }
+}
+
+@media screen and (max-width: 501px) { /* Smartphones */
+    .textblock {
+        width: 90%;
+        margin-left: -45%;
+    }
+}

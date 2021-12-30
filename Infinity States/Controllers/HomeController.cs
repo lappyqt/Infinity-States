@@ -55,12 +55,12 @@ namespace Infinity_States.Controllers
 
                 if (user.Password == hashCode.GenerateHashCode(password)) 
                 {
-                    var claims = new List<Claim>
+                    List<Claim> claims = new List<Claim>
                     {
                         new Claim(ClaimTypes.Name, username)
                     };
 
-                    var options = new CookieOptions
+                    CookieOptions options = new CookieOptions
                     {
                         Expires = DateTime.Now.AddMinutes(60),
                         IsEssential = true,
@@ -70,9 +70,9 @@ namespace Infinity_States.Controllers
                     Response.Cookies.Append("InfinityStates.Session.Id", user.Id.ToString(), options);
                     Response.Cookies.Append("InfinityStates.Session.Username", user.Username, options);
 
-                    var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
-                    var principal = new ClaimsPrincipal(identity);
-                    var props = new AuthenticationProperties();
+                    ClaimsIdentity identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+                    ClaimsPrincipal principal = new ClaimsPrincipal(identity);
+                    AuthenticationProperties props = new AuthenticationProperties();
                     HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal, props).Wait();
 
                     return RedirectToAction("Index", "Account");

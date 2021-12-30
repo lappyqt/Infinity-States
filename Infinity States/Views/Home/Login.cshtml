@@ -1,6 +1,4 @@
-<link rel="stylesheet" type="text/css" href="~/css/account.css">
-
-<h2>Sign In</h2>
+<h2>Welcome back</h2>
 <a class="back" href="/articles/all/"><img src="~/img/arrowLeft.svg" alt="Icon" width="16" height="16">Back</a>
 
 <div class="main">
@@ -10,7 +8,8 @@
         <button type="submit">Sign In</button>
         <p><a href="/home/registration">You don't have an account? Register now.</a></p>
     </form>
-</div>
+</div> 
 
-<style> header {display: none;} </style>
-<script type="text/javascript" src="~/build/app.js"></script>
+@section styles {
+    <link rel="stylesheet" type="text/css" href="~/css/layout/login-register.css">
+}

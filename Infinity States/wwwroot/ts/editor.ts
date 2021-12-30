@@ -1,9 +1,6 @@
 const editor: any = document.querySelector(".editorForm");
 const contentInput: any = document.querySelector(".content");
 
-contentInput.addEventListener("input", autoGrow);
-editor.addEventListener("submit", publish);
-
 function autoGrow() {
     contentInput.style.height = "auto";
     contentInput.style.height = `${contentInput.scrollHeight}px`;

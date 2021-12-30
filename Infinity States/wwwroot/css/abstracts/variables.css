@@ -1,0 +1,29 @@
+﻿:root {
+    /* Main Colors */
+
+    --color-dark: rgb(0, 0, 0);
+    --color-white: rgb(255, 255, 255);
+    --color-gray: rgb(91, 91, 91);
+
+    /* Hover Colors */
+
+    --color-button-hover: rgb(48, 48, 48);
+    --color-li-background-hover: rgb(222, 223, 224);
+    --color-a-hover: rgb(165, 165, 165);
+    --color-user-article-hover: rgb(222, 223, 224);
+
+    /* Icons */
+    
+    --icon-compass: url('~/img/compass.svg');
+    --icon-plus: url('~/img/plus.svg');
+    --icon-profile: url('~/img/profile.svg');
+    --icon-menu: url('~/img/menu.svg');
+    --icon-edit: url('~/img/edit.svg');
+    --icon-delete: url('~/img/delete.svg');
+    --icon-arrow-left: url('~/img/arrowLeft.svg');
+
+    /* Fonts */
+
+    --font-main: 'Inter', 'Segoe UI', sans-serif;
+    --font-title: 'Poppins', 'Inter', 'Segoe UI', sans-serif;
+}

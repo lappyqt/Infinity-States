@@ -1,21 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
 
 namespace Infinity_States.Models
 {
-    public enum ArticleCategories
-    {
-        Other,
-        Technology,
-        Travel,
-        Education,
-        Gaming
-    }
-
     public class Article
     {   
         [Key]
@@ -31,6 +19,24 @@ namespace Infinity_States.Models
         [Required, MaxLength(150)]
         public string Author { get; set; }
         [Required]
-        public ArticleCategories Category { get; set; }
+        public int Category { get; set; }
+
+        public Dictionary<int, string> CategoriesDictionary = new Dictionary<int, string>
+        {
+            { 0, "Other" },
+            { 1, "Technology" },
+            { 2, "Travel" },
+            { 3, "Education" },
+            { 4, "Reading" },
+            { 5, "Movies" },
+            { 6, "Gaming" },
+            { 7, "Politics" },
+            { 8, "Entertaiment" },
+            { 9, "Buisness" },
+            { 10, "Health & Fitness" },
+            { 11, "Career" },
+            { 12, "Food" },
+            { 13, "Self Improvenent" },
+        };
     }
 }

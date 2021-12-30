@@ -1,19 +1,19 @@
 @using Infinity_States.Models
 
-<div class="userArticlesList">
+<div class="user-articles-list">
     <span class="title">Your Articles</span>
 
     <form method="post" class="logout" action="/Account/Logout">
         <button type="submit">Logout</button>
     </form>
 
-    <ul class="userArticles">
+    <ul class="user-articles">
         @foreach(Article article in ViewBag.Articles)
         {
-            <li class="userArticle">
+            <li class="user-article">
                 <a href="/Articles/Article/@article.Id">@article.Title</a>
-                <a class="linkButton" href="/Account/DeleteArticle?@article.Id"><img class="elementIcon" src="../img/delete.svg"></a>
-                <a class="linkButton" href="/Articles/Edit/@article.Id"><img class="elementIcon" src="../img/edit.svg"></a>
+                <a class="icon-button" title="Delete" href="/Account/DeleteArticle?id=@article.Id"><img class="element-icon" src="../img/delete.svg"></a>
+                <a class="icon-button" title="Edit" href="/Articles/Edit/@article.Id"><img class="element-icon" src="../img/edit.svg"></a>
             </li>
         }
     </ul>

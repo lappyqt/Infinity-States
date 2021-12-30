@@ -1,10 +1,14 @@
-﻿using System.Collections.Generic;
-using System.Net;
+﻿using System.Net;
 using System.Net.Mail;
 
 namespace Infinity_States.Modules;
 
-public abstract class MailNotification
+interface IMailLetter
+{
+    void Send();
+}
+
+public abstract class MailNotification : IMailLetter
 {
     public abstract string MailName { get; set; }
     public abstract string SenderMail { get; set; }
@@ -49,7 +53,7 @@ public abstract class MailNotification
     }
 }
 
-public class SupportMailNotification : MailNotification
+public class SupportMailNotification : MailNotification, IMailLetter
 {
     public override string MailName { get; set; }
     public override string SenderMail { get; set; }
@@ -70,7 +74,7 @@ public class SupportMailNotification : MailNotification
     }
 }
 
-public class SecurityMailNotification : MailNotification
+public class SecurityMailNotification : MailNotification, IMailLetter
 {
     public override string MailName { get; set; }
     public override string SenderMail { get; set; }
@@ -91,7 +95,7 @@ public class SecurityMailNotification : MailNotification
     }
 }
 
-public class AccountMailNotification : MailNotification
+public class AccountMailNotification : MailNotification, IMailLetter
 {
     public override string MailName { get; set; }
     public override string SenderMail { get; set; }

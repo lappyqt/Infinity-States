@@ -25,6 +25,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="wwwroot\css\components\" />
+    <Folder Include="wwwroot\css\layout\" />
+    <Folder Include="wwwroot\css\themes\" />
     <Folder Include="wwwroot\lib\" />
   </ItemGroup>
 

@@ -67,7 +67,7 @@ namespace Infinity_States.Controllers
                 } 
                 else 
                 {
-                    IQueryable<Article> source = db.Articles.OrderBy(data => -data.Id).Where(data => data.Category == (ArticleCategories) filter);
+                    IQueryable<Article> source = db.Articles.OrderBy(data => -data.Id).Where(data => data.Category == filter);
                     var count = await source.CountAsync();
                     var items = await source.Skip((page - 1) * pageSize).Take(pageSize).ToListAsync();
                     PageViewModel pageViewModel = new PageViewModel(count, page, pageSize);
@@ -111,7 +111,7 @@ namespace Infinity_States.Controllers
         }
 
         [HttpGet]
-        public async Task<List<Article>> Filter(ArticleCategories value)
+        public async Task<List<Article>> Filter(int value)
         {
             using (ApplicationContext db = new ApplicationContext())
             {

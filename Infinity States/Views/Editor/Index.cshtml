@@ -1,19 +1,67 @@
-﻿<div class="textblock">
+﻿<section class="modal container">
+    <div class="modal-container">
+        <div class="modal-content">
+            <p>Choose article category</p>
+
+            <div class="categories disable-user-select">
+                <input name="select" id="other" type="radio" value="0" checked>
+                <label for="other">Other</label>
+
+                <input name="select" id="technology" type="radio" value="1">
+                <label for="technology">Technology</label>
+
+                <input name="select" id="travel" type="radio" value="2">
+                <label for="travel">Travel</label>
+
+                <input name="select" id="education" type="radio" value="3">
+                <label for="education">Education</label>
+
+                <input name="select" id="reading" type="radio" value="4">
+                <label for="reading">Reading</label>
+
+                <input name="select" id="movies" type="radio" value="5">
+                <label for="movies">Movies</label>
+
+                <input name="select" id="gaming" type="radio" value="6">
+                <label for="gaming">Gaming</label>
+
+                <input name="select" id="politics" type="radio" value="7">
+                <label for="politics">Politics</label>
+
+                <input name="select" id="entertaiment" type="radio" value="8">
+                <label for="entertaiment">Entertaiment</label>
+
+                <input name="select" id="buisness" type="radio" value="9">
+                <label for="buisness">Buisness</label>
+
+                <input name="select" id="health-and-fitness" type="radio" value="10">
+                <label for="health-and-fitness">Health & Fitness</label>
+
+                <input name="select" id="career" type="radio" value="11">
+                <label for="career">Career</label>
+
+                <input name="select" id="food" type="radio" value="12">
+                <label for="food">Food</label>
+
+                <input name="select" id="self-improvement" type="radio" value="13">
+                <label for="self-improvement">Self Improvement</label>
+            </div>
+
+            <button class="modal-button">Save and close</button>
+            <p><button class="modal-close-button">Don't save</button></p>
+        </div>
+    </div>
+</section>
+
+<div class="textblock">
     <form class="editorForm" method="post" action="/Editor/Publish">
         <input name="poster" type="text" class="poster" placeholder="Poster url...">
         <input name="title" type="text" class="title" placeholder="Title..."/>
         <textarea name="content" rows="10" style="height: auto;" class="content" placeholder="Your text here..."></textarea>
-
-        <select name="category" class="category">
-            <option value="0">Other</option>
-            <option value="1">Technology</option>
-            <option value="2">Travel</option>
-            <option value="3">Education</option>
-            <option value="4">Gaming</option>
-        </select>
+        <input name="category" type="hidden" value="1" hidden>
 
         <button type="submit" class="publish">Publish</button>
-        <button type="button" name="preview" class="publish">Preview</button>
+        <button type="button" name="preview" class="link-button publish">Category</button>
     </form>
 
     <span class="message" style="display: none;">You are not logged into your account. <a class="link" href="/home/login">Please, Sign In.</a></span>
@@ -26,8 +74,33 @@
     </script>
 }
 
-<script type="text/javascript" src="~/build/app.js"></script>
-<script>
-    window.addEventListener("load", loadDraft);
-    window.addEventListener("beforeunload", saveDraft);
-</script>
+@section scripts {
+    <script type="text/javascript" src="~/build/app.js"></script>
+
+    <script>
+        contentInput.addEventListener("input", autoGrow);   
+        editor.addEventListener("submit", publish);
+
+        window.addEventListener("load", loadDraft);
+        window.addEventListener("beforeunload", saveDraft);   
+        
+        const categoriesModal = new CategoriesModal
+        (
+            document.querySelector(".modal-container"),
+            document.querySelector(".categories")
+        );
+
+        const categoryButton = document.querySelector(".link-button");
+        const modalSaveButton = document.querySelector(".modal-button");
+        const modalCloseButton = document.querySelector(".modal-close-button");
+        const categoryInput = document.getElementsByName("category")[0];
+
+        categoryButton.onmousedown = () => categoriesModal.show();
+        modalSaveButton.onmousedown = () => {
+            categoryInput.value = categoriesModal.selectedCategory().value;
+            categoriesModal.hide();
+        }
+
+        modalCloseButton.onmousedown = () => categoriesModal.hide();
+    </script>
+}

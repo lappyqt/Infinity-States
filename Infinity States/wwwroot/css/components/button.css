@@ -1,0 +1,31 @@
+button {
+    outline: none;
+    border: none;
+    cursor: pointer;
+    background-color: var(--color-dark);
+    color: var(--color-white);
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-weight: 500;
+    font-size: 14px;
+    min-width: 70px;
+}
+
+button:hover { background-color: var(--color-button-hover); }
+
+button:disabled {
+    text-decoration: line-through;
+    cursor: default;
+}
+
+.link-button {
+    border: 1.5px solid var(--color-dark);
+    background-color: transparent;
+    padding: 7px 11px;
+    color: var(--color-dark);
+}
+
+.link-button:hover { 
+    cursor: pointer;
+    background: none; 
+}

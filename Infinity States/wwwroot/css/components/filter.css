@@ -1,0 +1,57 @@
+.filters::-webkit-scrollbar { display: none; }
+
+.filters {
+    overflow-x: scroll;
+    overflow-y: hidden;
+    scrollbar-width: none;
+    white-space: nowrap;
+    width: 40%;
+    height: 34px;
+    position: relative;
+    top: 15px;
+    left: 50%;
+    margin-left: -20%;
+}
+
+.filter {
+    display: inline-block;
+    font-size: 14px;
+    overflow-x: auto;
+    cursor: pointer;
+    vertical-align: middle;
+    padding: 6px 16px;
+    border: 1.5px solid #000;
+    border-radius: 300px;
+    margin-right: 5px;
+    font-weight: 500;
+    transition: all 0.15s;
+}
+
+.filter:hover {
+    background-color: #000;
+    color: #fff;
+}
+
+@media screen and (max-width: 1001px) {  /* Tablets */
+    .filters {
+        width: 60%;
+        margin-left: -30%;
+    }
+
+    .filter:hover {
+        background-color: transparent;
+        color: #000;
+    }
+}
+
+@media screen and (max-width: 501px) { /* Smartphones */
+    .filters {
+        width: 90%;
+        margin-left: -45%;
+    }
+
+    .filter:hover {
+        background-color: transparent;
+        color: #000;
+    }
+}

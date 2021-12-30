@@ -3,9 +3,21 @@
 
 <div class="filters">
     <a class="filter" href="/articles/all/">All Articles</a>
-    <relay value="By followed authors" action="/Articles/ByFollowedAuthors"></relay>
+    <a class="filter" asp-route-filter="0">By followed authors</a>
     <a class="filter" asp-route-filter="0">Other</a>
     <a class="filter" asp-route-filter="1">Technology</a>
+    <a class="filter" asp-route-filter="2">Travel</a>
+    <a class="filter" asp-route-filter="3">Education</a>
+    <a class="filter" asp-route-filter="4">Reading</a>
+    <a class="filter" asp-route-filter="5">Movies</a>
+    <a class="filter" asp-route-filter="6">Gaming</a>
+    <a class="filter" asp-route-filter="7">Politics</a>
+    <a class="filter" asp-route-filter="8">Entertaiment</a>
+    <a class="filter" asp-route-filter="9">Buisness</a>
+    <a class="filter" asp-route-filter="10">Health & Fitness</a>
+    <a class="filter" asp-route-filter="11">Career</a>
+    <a class="filter" asp-route-filter="12">Food</a>
+    <a class="filter" asp-route-filter="13">Self Improvement</a>  
 </div>
 
 <div class="articles">
@@ -14,23 +26,23 @@
         {
             <li>
                 <img class="articleImg" src="@article.Poster">
-                <p><a href="/articles/article/@article.Id">@article.Title</a></p>
-                <a class="authorLink" href="/users/@article.AuthorId">@article.Author</a>
+                <p><a class="title-link" href="/articles/article/@article.Id">@article.Title</a></p>
+                <a class="author-link" href="/users/@article.AuthorId">@article.Author</a>
             </li>
         }
     </ul>
 
-    <div class="pageControls">
+    <div class="page-controls">
         @if (Model.PageViewModel.HasPreviousPage)
         {
-           <a asp-action="All" class="pageControl" asp-route-page="@(Model.PageViewModel.PageNumber - 1)" asp-route-filter="@ViewData["filter"]">
+           <a asp-action="All" class="page-control" asp-route-page="@(Model.PageViewModel.PageNumber - 1)" asp-route-filter="@ViewData["filter"]">
                 Back
            </a>
         }
 
         @if (Model.PageViewModel.HasNextPage)
         {
-            <a asp-action="All" class="pageControl" asp-route-page="@(Model.PageViewModel.PageNumber + 1)" asp-route-filter="@ViewData["filter"]">
+            <a asp-action="All" class="page-control" asp-route-page="@(Model.PageViewModel.PageNumber + 1)" asp-route-filter="@ViewData["filter"]">
                 Forward
             </a>
         }

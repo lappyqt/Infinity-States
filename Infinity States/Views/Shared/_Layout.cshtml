@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     @await Html.PartialAsync("CssPartial")
-    <script src="~/lib/vue/vue.min.js"></script>
+    @RenderSection("styles", false)
+    <link rel="shortcut icon" type="image/png" href="~/img/icon.png"/>
     <title>@ViewBag.Title</title>
 </head>
 <body>
@@ -22,5 +23,6 @@
     </header>
     @RenderBody()
     @await Html.PartialAsync("ScriptsPartial")
+    @RenderSection("scripts", false)
 </body>
 </html>

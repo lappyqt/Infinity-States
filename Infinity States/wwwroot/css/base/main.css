@@ -1,0 +1,25 @@
+﻿@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Lato:wght@300;400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+@import url('../master.css');
+
+* {
+    padding: 0;
+    margin: 0;
+    font-family: var(--font-main);
+    -webkit-tap-highlight-color: transparent;
+}
+
+a {
+	color: var(--color-dark);
+	text-decoration: none;
+}
+
+#app {
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+}
+
+img { border-radius: 10px; max-height: 500px; }
+
+li { list-style: none; }
