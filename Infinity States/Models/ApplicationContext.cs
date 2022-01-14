@@ -11,7 +11,7 @@ namespace Infinity_States.Models
 
         public ApplicationContext()
         {
-            Database.EnsureCreated();
+           Database.EnsureCreated();
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

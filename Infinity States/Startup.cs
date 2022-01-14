@@ -1,13 +1,9 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using Infinity_States.Services;
 
 namespace Infinity_States
 {
@@ -18,11 +14,14 @@ namespace Infinity_States
             services.AddControllersWithViews();
 
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-                .AddCookie(options => {
+                .AddCookie(options =>
+                {
                     options.LoginPath = "/home/login";
                     options.LogoutPath = "/account";
                     options.Cookie.Name = "InfinityStates.Cookie";
                 });
+
+            //services.AddTransient<IEmailNotificationSender, EmailNotificationSender>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

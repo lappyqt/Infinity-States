@@ -1,14 +1,9 @@
 ﻿using System.Net;
 using System.Net.Mail;
 
-namespace Infinity_States.Modules;
+namespace Infinity_States.Services;
 
-interface IMailLetter
-{
-    void Send();
-}
-
-public abstract class MailNotification : IMailLetter
+public abstract class EmailNotificationSender : IEmailNotificationSender
 {
     public abstract string MailName { get; set; }
     public abstract string SenderMail { get; set; }
@@ -21,7 +16,7 @@ public abstract class MailNotification : IMailLetter
     public virtual int SmtpPort => 587;
     public virtual bool IsSmtpSSL => true;
 
-    public MailNotification()
+    public EmailNotificationSender()
     {
         this.MailName = MailName;
         this.SenderMail = SenderMail;
@@ -53,7 +48,7 @@ public abstract class MailNotification : IMailLetter
     }
 }
 
-public class SupportMailNotification : MailNotification, IMailLetter
+public class SupportMailNotification : EmailNotificationSender, IEmailNotificationSender
 {
     public override string MailName { get; set; }
     public override string SenderMail { get; set; }
@@ -74,7 +69,7 @@ public class SupportMailNotification : MailNotification, IMailLetter
     }
 }
 
-public class SecurityMailNotification : MailNotification, IMailLetter
+public class SecurityMailNotification : EmailNotificationSender, IEmailNotificationSender
 {
     public override string MailName { get; set; }
     public override string SenderMail { get; set; }
@@ -95,7 +90,7 @@ public class SecurityMailNotification : MailNotification, IMailLetter
     }
 }
 
-public class AccountMailNotification : MailNotification, IMailLetter
+public class AccountMailNotification : EmailNotificationSender, IEmailNotificationSender
 {
     public override string MailName { get; set; }
     public override string SenderMail { get; set; }

@@ -1,7 +1,7 @@
 interface IModal {
     containerSource: any;
-    show();
-    hide();
+    show(): void;
+    hide(): void;
 }
 
 class Modal implements IModal {
@@ -11,12 +11,12 @@ class Modal implements IModal {
         this.containerSource = containerSource;
     }
 
-    show() {
-        this.containerSource.classList.add("open");
+    show(): void {
+        this.containerSource.classList.add("active");
     }
 
-    hide() {
-        this.containerSource.classList.remove("open");
+    hide(): void {
+        this.containerSource.classList.remove("active");
     }
 }
 
@@ -31,8 +31,20 @@ class CategoriesModal extends Modal {
         this.categories = categories;
     }
 
-    selectedCategory() {
-        let selectedCategory;
+    override show(): void {
+        super.show();
+
+        this.containerSource.style.top = `${window.scrollY}px`;
+        document.body.style.overflow = "hidden";
+    }
+
+    override hide(): void {
+        super.hide();
+        document.body.style.overflow = "visible";
+    }
+
+    selectedCategory(): any {
+        let selectedCategory: any;
         let childrens = Array.prototype.slice.call(this.categories.children);
 
         childrens.forEach(category => {
@@ -42,5 +54,18 @@ class CategoriesModal extends Modal {
         });
 
         return selectedCategory;
+    }
+}
+
+class CardModal extends Modal {
+    public containerSource: any;
+
+    constructor(containerSource) {
+        super(containerSource);
+        this.containerSource.onmouseleave = () => this.hide();
+    }
+
+    toggle(): void {
+        this.containerSource.classList.toggle("active");
     }
 }

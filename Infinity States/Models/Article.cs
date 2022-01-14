@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Infinity_States.Models
@@ -21,7 +20,7 @@ namespace Infinity_States.Models
         [Required]
         public int Category { get; set; }
 
-        public Dictionary<int, string> CategoriesDictionary = new Dictionary<int, string>
+        public static Dictionary<int, string> CategoriesDictionary = new Dictionary<int, string>
         {
             { 0, "Other" },
             { 1, "Technology" },
@@ -31,12 +30,12 @@ namespace Infinity_States.Models
             { 5, "Movies" },
             { 6, "Gaming" },
             { 7, "Politics" },
-            { 8, "Entertaiment" },
-            { 9, "Buisness" },
+            { 8, "Entertainment" },
+            { 9, "Business" },
             { 10, "Health & Fitness" },
             { 11, "Career" },
             { 12, "Food" },
-            { 13, "Self Improvenent" },
+            { 13, "Self Improvement" },
         };
     }
 }

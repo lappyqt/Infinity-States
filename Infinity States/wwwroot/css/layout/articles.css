@@ -14,7 +14,7 @@
     font-family: var(--font-main);
     font-size: 24px;
     font-weight: 600;
-    color: var(--color-dak);
+    color: var(--color-dark);
     margin-top: 10px;
 }
 
@@ -65,7 +65,7 @@
 
 .user-article {
     padding: 10px;
-    border-radius: 5px;
+    border-radius: 8px;
     transition: all 0.2s;
 }
 

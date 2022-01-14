@@ -7,7 +7,7 @@
         <input name="id" type="hidden" id="articleId" value="@ViewBag.Article.Id">
         <input name="poster" type="text" class="poster" placeholder="Poster url..." value="@ViewBag.Article.Poster">
         <input name="title" type="text" class="title" placeholder="Title..." value="@ViewBag.Article.Title">
-        <textarea name="content" class="content" rows="10" style="height: auto;" placeholder="Your text here...">@ViewBag.Article.Content</textarea>
+        <textarea style="resize: none;" name="content" class="content" rows="10" style="height: auto;" placeholder="Your text here...">@ViewBag.Article.Content</textarea>
         <button type="submit" class="publish">Update</button>
     </form>
 </div>

@@ -1,4 +1,9 @@
+/.idea
 /.vs
+/.vscode
+/.editorconfig
+/Infinity States/.vs
+/Infinity States/.vscode
 /Infinity States/bin
 /Infinity States/obj
 /Infinity States/.config

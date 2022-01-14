@@ -43,7 +43,7 @@ namespace Infinity_States.Controllers
         }
 
         [Route("/articles/all/{*page}")]
-        public async Task<IActionResult> All(int page = 1, int filter = -1)
+        public async Task<IActionResult> All(int page = 1, short filter = -1)
         {
             ViewData["filter"] = filter;
 
@@ -54,8 +54,8 @@ namespace Infinity_States.Controllers
                 if (filter <= -1)
                 {
                     IQueryable<Article> source = db.Articles.OrderBy(data => -data.Id);
-                    var count = await source.CountAsync();
-                    var items = await source.Skip((page - 1) * pageSize).Take(pageSize).ToListAsync();
+                    int count = await source.CountAsync();
+                    List<Article> items = await source.Skip((page - 1) * pageSize).Take(pageSize).ToListAsync();
 
                     PageViewModel pageViewModel = new PageViewModel(count, page, pageSize);
                     IndexViewModel viewModel = new IndexViewModel
@@ -68,8 +68,8 @@ namespace Infinity_States.Controllers
                 else 
                 {
                     IQueryable<Article> source = db.Articles.OrderBy(data => -data.Id).Where(data => data.Category == filter);
-                    var count = await source.CountAsync();
-                    var items = await source.Skip((page - 1) * pageSize).Take(pageSize).ToListAsync();
+                    int count = await source.CountAsync();
+                    List<Article> items = await source.Skip((page - 1) * pageSize).Take(pageSize).ToListAsync();
                     PageViewModel pageViewModel = new PageViewModel(count, page, pageSize);
                     IndexViewModel viewModel = new IndexViewModel
                     {

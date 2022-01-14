@@ -16,11 +16,16 @@ namespace Infinity_States.Controllers
         {
             using (ApplicationContext db = new ApplicationContext())
             {
-                User user = await db.Users.FindAsync(id);
+                User user = await db.Users.FindAsync(id);   // Owner of page 
                 List<Article> userArticles = await db.Articles.OrderBy(data => -data.Id).Where(data => data.AuthorId == id).ToListAsync();
-
+                
                 ViewBag.UserData = user;
                 ViewBag.UserArticles = userArticles;
+                
+                Int32.TryParse(Request.Cookies["InfinityStates.Session.Id"], out int userId);
+                User currentUser = await db.Users.FindAsync(userId);    // The user who visits the page of another user (in this case the "user")
+                ViewBag.Followed = currentUser?.Authors.Contains(user.Username) ?? false;
+                
                 return View();
             }
         }
@@ -38,7 +43,7 @@ namespace Infinity_States.Controllers
 
         [Route("/users/articles/{*id}")]
         [HttpGet]
-        public async Task <List<Article>> Articles(int id)
+        public async Task<List<Article>> Articles(int id)
         {
             using (ApplicationContext db = new ApplicationContext())
             {
@@ -48,7 +53,7 @@ namespace Infinity_States.Controllers
 
         [Route("/users/follow")]
         [HttpPost]
-        public async Task <IActionResult> Follow(string author)
+        public async Task<IActionResult> Follow(string author)
         {
             using (ApplicationContext db = new ApplicationContext())
             {
@@ -56,6 +61,8 @@ namespace Infinity_States.Controllers
                 User user = await db.Users.FindAsync(userId);
 
                 if (user.Authors.Contains(author) == false) user.Authors.Add(author);
+                else user.Authors.Remove(author);
+                
                 await db.SaveChangesAsync();
             }
             return Redirect(Request.Headers["Referer"].ToString());

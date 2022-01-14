@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 namespace Infinity_States.Models
 {
     public class User
-    {   
+    {
         [Key]
         public int Id { get; set; }
         [Required, MaxLength(150)]

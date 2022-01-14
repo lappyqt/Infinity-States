@@ -12,8 +12,10 @@ namespace Infinity_States.Modules
             string result = string.Empty;
             byte[] byteArray = Encoding.Default.GetBytes(text);
 
-            for (int i = 0; i < byteArray.Length; i++) 
-                result += byteArray[i];
+            for (int i = 0; i < byteArray.Length; i++)
+            {
+                result += byteArray[i];   
+            }
 
             return result;
         }

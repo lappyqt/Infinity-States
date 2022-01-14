@@ -29,10 +29,10 @@
                 <label for="politics">Politics</label>
 
                 <input name="select" id="entertaiment" type="radio" value="8">
-                <label for="entertaiment">Entertaiment</label>
+                <label for="entertaiment">Entertainment</label>
 
                 <input name="select" id="buisness" type="radio" value="9">
-                <label for="buisness">Buisness</label>
+                <label for="buisness">Business</label>
 
                 <input name="select" id="health-and-fitness" type="radio" value="10">
                 <label for="health-and-fitness">Health & Fitness</label>
@@ -56,9 +56,19 @@
 <div class="textblock">
     <form class="editorForm" method="post" action="/Editor/Publish">
         <input name="poster" type="text" class="poster" placeholder="Poster url...">
-        <input name="title" type="text" class="title" placeholder="Title..."/>
-        <textarea name="content" rows="10" style="height: auto;" class="content" placeholder="Your text here..."></textarea>
+        <input name="title" type="text" class="title" placeholder="Story title..."/>
+        <div contenteditable="true" class="content" data-placeholder="Write an interesting story..."></div>
         <input name="category" type="hidden" value="1" hidden>
+        <input class="hidden-content" name="content" type="hidden" hidden>
+
+        <div class="editor-tools">
+            <a class="tool" data-element="bold">B</a>
+            <a class="tool" data-element="italic">I</a>
+            <a class="tool" data-element="underline">U</a>
+            <a class="tool" data-element="justifyLeft">JL</a>
+            <a class="tool" data-element="justifyCenter">JC</a>
+            <a class="tool" data-element="justifyRight">JR</a>
+        </div>
 
         <button type="submit" class="publish">Publish</button>
         <button type="button" name="preview" class="link-button publish">Category</button>
@@ -78,8 +88,11 @@
     <script type="text/javascript" src="~/build/app.js"></script>
 
     <script>
-        contentInput.addEventListener("input", autoGrow);   
-        editor.addEventListener("submit", publish);
+        appendEditorTools();
+
+        window.onsubmit = () => setHiddenValue(content, document.querySelector(".hidden-content"));
+
+        //editor.addEventListener("submit", publish);
 
         window.addEventListener("load", loadDraft);
         window.addEventListener("beforeunload", saveDraft);   

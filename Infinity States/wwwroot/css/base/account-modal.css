@@ -1,0 +1,27 @@
+.account-modal {
+    font-weight: 500;
+    display: inline-block;
+    width: 260px;
+    height: 400px;
+    background-color: var(--color-dark) !important;
+    position: absolute;
+    right: -100px;
+    top: 48px;
+    z-index: 1905;
+    border-radius: 10px;
+    padding: 20px;
+    opacity: 0;
+    visibility: hidden;
+    transition: linear 0.3s;
+}
+
+.account-modal.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+@media screen and (max-width: 1001px) {
+    .account-modal {
+        display: none;
+    }
+}

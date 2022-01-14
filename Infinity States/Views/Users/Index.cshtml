@@ -7,7 +7,16 @@
 
         <form method="post" class="follow" action="/Users/Follow">
             <input type="hidden" name="author" value="@ViewBag.UserData.Username" class="author" />
-            <button type="submit">Follow</button>
+            
+            @if (ViewBag.Followed)
+            {
+                <button class="link-button" type="submit">Followed</button>
+            }
+            
+            @if (!ViewBag.Followed)
+            {
+                <button type="submit">Follow</button>
+            }
         </form>
     </div>
 
