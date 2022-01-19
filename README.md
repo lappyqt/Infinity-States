@@ -53,3 +53,9 @@ __Install on linux from repository (Debian based)__
     
     sudo apt-get update
     sudo apt-get install postgresql
+
+## Architecture
+
+For the architecture of this project, we use official guidelines from Microsoft _(with modifications)_. Please, download the book from the link below...
+
+[ASP.NET Core architecture e-book](https://dotnet.microsoft.com/en-us/learn/aspnet/architecture)
