@@ -1,4 +1,4 @@
-﻿@using Infinity_States.Models;
+﻿@using Infinity_States.Data;
 
 <div class="user-container">
     <div class="user-data">
@@ -12,8 +12,7 @@
             {
                 <button class="link-button" type="submit">Followed</button>
             }
-            
-            @if (!ViewBag.Followed)
+            else
             {
                 <button type="submit">Follow</button>
             }
@@ -27,15 +26,7 @@
 </div>
 
 <div class="articles">
-    <ul class="articlesList">
-        @foreach (Article article in ViewBag.UserArticles)
-        {
-            <li>
-                <img class="articleImg" src="@article.Poster">
-                <p><a href="/Articles/Article/@article.Id">@article.Title</a></p>
-            </li>
-        }
-    </ul>
+     @await Component.InvokeAsync("ArticleList")
 </div>
 
 @section scripts {

@@ -8,33 +8,76 @@
     margin-left: -20%;
 }
 
-.articles img { width: 100%; height: auto; transition: all 0.2s; background: #eee;}
-
-.articles p {
-    font-family: var(--font-main);
-    font-size: 24px;
-    font-weight: 600;
-    color: var(--color-dark);
-    margin-top: 10px;
+.article-block {
+    height: 100%;
+    box-shadow: 0px 0px 0px 1px #ababab inset;
+    border-radius: 10px;
+    list-style: none;
+    margin-bottom: 50px;
 }
 
-.articles .title-link {
+.article-block img {
+    width: 100%;
+    height: auto;
+    max-height: 500px;
+}        
+
+.article-poster {
+    box-sizing: border-box;
+}
+
+.article-poster img {
+    border-radius: 10px 10px 0 0;
+}
+
+.article-content {
+    padding-left: 20px;
+    padding-right: 20px;
+    text-align: justify;
+}
+
+.article-content >
+.title {
+    font-family: var(--font-title);
+    font-size: 24px;
+    font-weight: 700;
+    padding-top: 5px;
+    padding-bottom: 2.5px;
+}
+
+.article-content >
+.author-and-data {
+    font-weight: 500;
+    padding-bottom: 10px;
+    font-family: var(--font-title);
+    font-size: 14px;
+    color: #5b5b5b;
+}
+
+.author-and-data > a {
+    color: #5b5b5b;
     font-family: var(--font-title);
 }
 
-.author-link {
-    font-weight: 500;
-    color: var(--color-gray);
-    padding: 2px;
+
+.article-content >
+.bottom-content {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    display: flex;
+    align-items: center;
 }
 
-.articles li {
-    margin-bottom: 50px;
+.bottom-content >
+button {
+    margin-left: auto;
+    order: 2;
+    font-weight: 500;
 }
 
 .user-articles-list {
 	width: 40%;
-    margin-top: 30px;
+    margin-top: 20px;
     position: absolute;
     left: 50%;
     transform: translate(-50%, 0);
@@ -76,13 +119,33 @@
     margin-left: 10px;
 }
 
-.element-icon { border-radius: 0; position: relative; top: 1px; width: 16px; height: 16px;}
+.content-create-message {
+    text-align: center;
+    font-weight: 500;
+    padding: 20px;
+    border: 1px solid;
+    border-radius: 8px;
+}
+
+.content-create-message p {
+    margin-bottom: 15px;
+}
+
+.element-icon {
+    border-radius: 0;
+    position: relative;
+    top: 1px;
+    width: 16px;
+    height: 16px;
+}
 
 .page-controls {
     float: right;
 }
 
 .page-control {
+    display: inline-block;
+    text-align: center;
     border: 1.5px solid #000;
     background-color: transparent;
     padding: 8px 12px;
@@ -90,7 +153,7 @@
     font-weight: 500;
     font-size: 14px;
     margin-left: 10px;
-    min-width: 70px;
+    min-width: 50px;
 }
 
 @media screen and (max-width: 1001px) {  /* Tablets */

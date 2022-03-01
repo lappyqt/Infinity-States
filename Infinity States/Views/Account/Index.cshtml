@@ -1,4 +1,4 @@
-@using Infinity_States.Models
+@using Infinity_States.Data
 
 <div class="user-articles-list">
     <span class="title">Your Articles</span>
@@ -14,6 +14,13 @@
                 <a href="/articles/article/@article.Id">@article.Title</a>
                 <a class="icon-button" title="Delete" href="/Account/DeleteArticle?id=@article.Id"><img class="element-icon" src="../img/delete.svg"></a>
                 <a class="icon-button" title="Edit" href="/articles/edit/@article.Id"><img class="element-icon" src="../img/edit.svg"></a>
+            </li>
+        }
+
+        @if (ViewBag.Articles.Count < 1) {
+            <li class="content-create-message">
+                <p>You have not written any articles</p>
+                <button onclick="window.location='/editor'">Create new</button>
             </li>
         }
     </ul>

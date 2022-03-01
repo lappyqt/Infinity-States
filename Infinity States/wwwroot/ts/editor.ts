@@ -10,21 +10,28 @@ function publish(): void {
     setTimeout(() => {
         editor.elements[1].value = "";
         editor.elements[2].value = "";
-
-        localStorage.setItem("title", "");
-        localStorage.setItem("content", "");
     }, 1);
+
+    localStorage.clear();
 }
 
 function appendEditorTools(): void {
     const tools: any = document.querySelectorAll(".tool");
 
-    tools.forEach(tool => {
-        tool.addEventListener("mousedown", () => {
-            let command = tool.dataset["element"];
-            document.execCommand(command, false, null);     
+    for (let tool of tools) {
+        tool.addEventListener("mousedown", function() {
+            const command = tool.dataset["element"];
+
+            switch (command) {
+                case "title": {
+                    let selection = document.getSelection();
+                    document.execCommand("insertHTML", false, `<h3>${selection}</h3>`);
+                }
+
+                default: document.execCommand(command, false, null);
+            }
         });
-    });
+    }
 }
 
 function setHiddenValue(currentElement: any, hiddenElement: any) {
@@ -32,11 +39,17 @@ function setHiddenValue(currentElement: any, hiddenElement: any) {
 }
 
 function saveDraft(): void {
-    localStorage.setItem("title", editor.elements[1].value);
-    localStorage.setItem("content", editor.elements[2].value);
+    const editorArticleDraft: object = {
+		title: editor.elements[1].value,
+		content: contentInput.innerHTML,    // Div with contentededible
+    };
+	
+    localStorage.setItem("articleDraft", JSON.stringify(editorArticleDraft));
 }
 
 function loadDraft(): void {
-    editor.elements[1].value = localStorage.getItem("title");
-    editor.elements[2].value = localStorage.getItem("content");
+    const draft = JSON.parse(localStorage.getItem("articleDraft"));
+
+	editor.elements[1].value = draft.title;
+	contentInput.innerHTML = draft.content;
 }

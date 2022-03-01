@@ -1,4 +1,4 @@
-﻿@using Infinity_States.Models
+﻿@using Infinity_States.Data
 @model IndexViewModel
 
 <div class="filters">
@@ -21,16 +21,7 @@
 </div>
 
 <div class="articles">
-    <ul class="articlesList">
-        @foreach (Article article in Model.Articles)
-        {
-            <li>
-                <img class="articleImg" src="@article.Poster">
-                <p><a class="title-link" href="/articles/article/@article.Id">@article.Title</a></p>
-                <a class="author-link" href="/users/@article.AuthorId">@article.Author</a>
-            </li>
-        }
-    </ul>
+    @await Component.InvokeAsync("ArticleList")
 
     <div class="page-controls">
         @if (Model.PageViewModel.HasPreviousPage)

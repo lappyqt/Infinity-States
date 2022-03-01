@@ -1,0 +1,27 @@
+﻿@using Infinity_States.Data
+@model IndexViewModel
+
+<ul class="article-list">
+    @foreach (Article article in Model.Articles)
+    {
+        <li class="article-block">
+            <div class="article-poster"><img src="@article.Poster"></div>
+            <div class="article-content">
+                <p class="title"><a href="/articles/article/@article.Id">@article.Title</a></p>
+                <p class="author-and-data"><a href="/users/@article.AuthorId" class="author">@article.Author</a> • @article.PublicationDateTime.ToString("dd/MM/yy")</p>
+                <span class="first-paragraph">
+                    @article.Content.Split(Environment.NewLine.ToCharArray()).FirstOrDefault()
+                </span>
+
+                <div class="bottom-content">
+                    <div class="category"><a href="/articles/all?filter=@article.Category" class="filter">@Article.CategoriesDictionary[article.Category]</a></div>
+                    <button onclick="window.location = '/articles/article/@article.Id'">Read More</button>
+                </div>
+            </div>
+        </li>
+    }
+</ul>
+
+<script>
+    document.querySelectorAll(".first-paragraph").forEach(content => content.innerHTML = content.innerText);
+</script>

@@ -18,10 +18,8 @@ namespace Infinity_States
                 {
                     options.LoginPath = "/home/login";
                     options.LogoutPath = "/account";
-                    options.Cookie.Name = "InfinityStates.Cookie";
+                    options.Cookie.Name = "InfinityStates.Authentication.Data";
                 });
-
-            //services.AddTransient<IEmailNotificationSender, EmailNotificationSender>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

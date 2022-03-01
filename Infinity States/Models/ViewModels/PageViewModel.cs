@@ -1,6 +1,6 @@
 using System;
  
-namespace Infinity_States.Models
+namespace Infinity_States.Data
 {
     public class PageViewModel
     {

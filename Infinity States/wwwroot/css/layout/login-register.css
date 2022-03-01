@@ -54,7 +54,7 @@ h2 {
 	top: 2px;
 }
 
-.errorOutput { position: relative; top: 10px; }
+.errorOutput { position: relative; top: 10px; user-select: none; font-weight: 500; }
 
 
 @media screen and (max-width: 1001px) { /* Tablets */

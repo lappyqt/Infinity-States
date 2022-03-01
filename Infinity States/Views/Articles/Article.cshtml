@@ -1,4 +1,4 @@
-﻿@using Infinity_States.Models
+﻿@using Infinity_States.Data
 
 @{
     ViewBag.Title = ViewBag.Article.Title;
@@ -15,6 +15,9 @@
 
 <script type="text/javascript" src="~/build/app.js"></script>
 <script>
+    const content = document.querySelector(".content");
+    const up = document.querySelector(".up");
+
     window.addEventListener("scroll", onScroll);
     up.addEventListener("click", scrollToTop);
     

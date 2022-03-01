@@ -2,9 +2,16 @@
 /.vs
 /.vscode
 /.editorconfig
+
 /Infinity States/.vs
 /Infinity States/.vscode
 /Infinity States/bin
 /Infinity States/obj
 /Infinity States/.config
 /Infinity States/wwwroot/build
+
+/InfinityStates.Tests/.vs
+/InfinityStates.Tests/.vscode
+/InfinityStates.Tests/bin
+/InfinityStates.Tests/obj
+/InfinityStates.Tests/.config

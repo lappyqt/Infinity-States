@@ -1,0 +1,25 @@
+﻿.search {
+    width: 100%;
+    border: none;
+    outline: none;
+    color: var(--color-white);
+    background-color: transparent;
+    font-size: 16px;
+    font-weight: 500;
+    padding-left: 20px;
+    position: absolute;
+}
+
+.visible {
+    transition: opacity 0.25s, visibility 0.25s;
+    visibility: visible;
+    opacity: 1;
+}
+
+.search::placeholder {
+    color: #efefef;
+}
+
+.search-button {
+    cursor: pointer;
+}

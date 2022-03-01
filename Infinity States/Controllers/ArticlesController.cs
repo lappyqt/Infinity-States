@@ -1,10 +1,11 @@
 ﻿using System;
 using Microsoft.AspNetCore.Mvc;
-using Infinity_States.Models;
+using Infinity_States.Data;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
 
 namespace Infinity_States.Controllers
 {
@@ -34,7 +35,7 @@ namespace Infinity_States.Controllers
                 Article article = await db.Articles.FindAsync(id);
                 ViewBag.Article = article;
 
-                if (Request.Cookies["InfinityStates.Session.Username"] == article.Author)
+                if (HttpContext.User.Identity.Name == article.Author)
                 {
                     return View();
                 }
@@ -49,7 +50,7 @@ namespace Infinity_States.Controllers
 
             using (ApplicationContext db = new ApplicationContext())
             {   
-                int pageSize = 50;
+                int pageSize = 25;
 
                 if (filter <= -1)
                 {
@@ -97,13 +98,13 @@ namespace Infinity_States.Controllers
             using (ApplicationContext db = new ApplicationContext())
             {   
                 List<Article> resultList = new List<Article>();
-                var userId = Int32.Parse(Request.Cookies["InfinityStates.Session.Id"]);
+                int userId = Int32.Parse(HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier).Value);
                 User user = await db.Users.FindAsync(userId);
 
                 foreach (string author in user.Authors)
                 {
                     Article article = await db.Articles.Where(data => data.Author == author).OrderBy(data => data.Id).LastOrDefaultAsync();
-                    resultList.Add(article);
+                    if (article is not null) resultList.Add(article);
                 } 
 
                 return resultList;

@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System;
-using Infinity_States.Models;
+using Infinity_States.Data;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
+using System.Linq;
+using System.Security.Claims;
 
 namespace Infinity_States.Controllers
 {
@@ -10,7 +12,7 @@ namespace Infinity_States.Controllers
     {
         public IActionResult Index()
         {
-            ViewBag.Username = Request.Cookies["InfinityStates.Session.Username"];
+            ViewBag.Username = HttpContext.User.Identity.Name;
             return View();
         }
         
@@ -19,16 +21,18 @@ namespace Infinity_States.Controllers
         {
             using (ApplicationContext db = new ApplicationContext())
             {
-                var authorId = Request.Cookies["InfinityStates.Session.Id"];
-                var author = Request.Cookies["InfinityStates.Session.Username"];
+                string authorId = HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier).Value;
+                string author = HttpContext.User.Identity.Name;
 
-                Article article = new Article { 
+                Article article = new Article 
+                { 
                     Poster = poster,
                     Title = title,
                     Content = content,
                     AuthorId = Int32.Parse(authorId),
                     Author = author,
-                    Category = category
+                    Category = category,
+                    PublicationDateTime = DateTime.UtcNow,
                 };
 
                 db.Articles.Add(article);

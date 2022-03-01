@@ -62,12 +62,16 @@
         <input class="hidden-content" name="content" type="hidden" hidden>
 
         <div class="editor-tools">
-            <a class="tool" data-element="bold">B</a>
-            <a class="tool" data-element="italic">I</a>
-            <a class="tool" data-element="underline">U</a>
-            <a class="tool" data-element="justifyLeft">JL</a>
-            <a class="tool" data-element="justifyCenter">JC</a>
-            <a class="tool" data-element="justifyRight">JR</a>
+            <a title="Bold" class="tool" data-element="bold">B</a>
+            <a title="Italic"class="tool" data-element="italic">I</a>
+            <a title="Underline" class="tool" data-element="underline">U</a>
+            <a title="Title" class="tool" data-element="title">T</a>
+            <a title="Justify left" class="tool" data-element="justifyLeft">JL</a>
+            <a title="Justify center" class="tool" data-element="justifyCenter">JC</a>
+            <a title="Justify right" class="tool" data-element="justifyRight">JR</a>
+            <a title="Justify full" class="tool" data-element="justifyFull">JF</a>
+            <a title="Insert ordered list" class="tool" data-element="insertOrderedList">IO</a>
+            <a title="Insert unordered list" class="tool" data-element="insertUnorderedList">IU</a>
         </div>
 
         <button type="submit" class="publish">Publish</button>
@@ -90,7 +94,7 @@
     <script>
         appendEditorTools();
 
-        window.onsubmit = () => setHiddenValue(content, document.querySelector(".hidden-content"));
+        window.onsubmit = () => setHiddenValue(document.querySelector(".content"), document.querySelector(".hidden-content"));
 
         //editor.addEventListener("submit", publish);
 

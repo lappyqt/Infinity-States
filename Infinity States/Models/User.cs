@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace Infinity_States.Models
+namespace Infinity_States.Data
 {
     public class User
     {

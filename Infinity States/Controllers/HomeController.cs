@@ -1,6 +1,6 @@
 using System;
 using Microsoft.AspNetCore.Mvc;
-using Infinity_States.Models;
+using Infinity_States.Data;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -57,18 +57,9 @@ namespace Infinity_States.Controllers
                 {
                     List<Claim> claims = new List<Claim>
                     {
+                        new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
                         new Claim(ClaimTypes.Name, username)
                     };
-
-                    CookieOptions options = new CookieOptions
-                    {
-                        Expires = DateTime.Now.AddMinutes(60),
-                        IsEssential = true,
-                        HttpOnly = true
-                    };
-
-                    Response.Cookies.Append("InfinityStates.Session.Id", user.Id.ToString(), options);
-                    Response.Cookies.Append("InfinityStates.Session.Username", user.Username, options);
 
                     ClaimsIdentity identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
                     ClaimsPrincipal principal = new ClaimsPrincipal(identity);

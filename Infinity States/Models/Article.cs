@@ -1,7 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace Infinity_States.Models
+namespace Infinity_States.Data
 {
     public class Article
     {   
@@ -19,6 +20,7 @@ namespace Infinity_States.Models
         public string Author { get; set; }
         [Required]
         public int Category { get; set; }
+        public DateTime PublicationDateTime { get; set; }
 
         public static Dictionary<int, string> CategoriesDictionary = new Dictionary<int, string>
         {

@@ -16,7 +16,7 @@ function httpGet(url, method = "Get", body = null) {
 
 function openMenu() {
     const header: any = document.querySelector("header");
-    const links: any = document.querySelector(".links");
+    const links: any = document.querySelector(".header-section");
     const logo: any = document.querySelector(".logo");
 
     if (header.classList.contains("opened")) {

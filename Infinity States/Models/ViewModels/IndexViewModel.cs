@@ -1,6 +1,6 @@
 using System.Collections.Generic;
  
-namespace Infinity_States.Models
+namespace Infinity_States.Data
 {
     public class IndexViewModel
     {

@@ -2,10 +2,10 @@
 <a class="back" href="/articles/all/"><img src="~/img/arrowLeft.svg" alt="Icon" width="16" height="16">Back</a>
 
 <div class="main">
-    <form method="post" class="form" action="/Home/Create" onsubmit="return inputValidationController.validate(this)">
+    <form method="post" class="form" action="/Home/Create" onsubmit="return validateInputsOnEmpty(this)">
         <p><input type="text" name="mail" class="data" placeholder="Your mail..."></p>
         <p><input type="text" name="username" class="data" placeholder="Your username..."></p>
-        <p><input type="password" name="password" class="data" placeholder="Your password..."></p>
+        <p><input type="password" name="password" class="data" placeholder="Your password..." autocomplete="on"></p>
         <button type="submit">Sign Up</button>
     </form>
     <span class="errorOutput"></span>
