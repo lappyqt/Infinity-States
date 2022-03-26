@@ -16,7 +16,7 @@ namespace Infinity_States
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddCookie(options =>
                 {
-                    options.LoginPath = "/home/login";
+                    options.LoginPath = "/home/signin";
                     options.LogoutPath = "/account";
                     options.Cookie.Name = "InfinityStates.Authentication.Data";
                 });
@@ -27,6 +27,18 @@ namespace Infinity_States
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+            }
+            else
+            {
+                app.Use(async (ctx, next) =>
+                {
+                    await next();
+                    if (ctx.Response.StatusCode == 404 && !ctx.Response.HasStarted)
+                    {
+                        ctx.Request.Path = "/notfound";
+                        await next();
+                    }
+                });
             }
 
             app.UseRouting();

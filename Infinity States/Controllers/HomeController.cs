@@ -21,18 +21,24 @@ namespace Infinity_States.Controllers
             return View();
         }
 
-        public IActionResult Login()
+        public IActionResult SignIn()
         {
             return View();
         }
 
-        public IActionResult Registration()
+        public IActionResult SignUp()
+        {
+            return View();
+        }
+
+        [Route("/notfound")]
+        public IActionResult NotFoundError()
         {
             return View();
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(string mail, string username, string password)
+        public async Task<IActionResult> CreateAccount(string mail, string username, string password)
         {
             using (ApplicationContext db = new ApplicationContext())
             {
@@ -42,11 +48,11 @@ namespace Infinity_States.Controllers
                 await db.SaveChangesAsync();
             }
 
-            return RedirectToAction("Login", "Home");
+            return RedirectToAction("SignIn", "Home");
         }
                 
         [HttpPost]
-        public async Task<IActionResult> Login(string username, string password)
+        public async Task<IActionResult> SignIn(string username, string password)
         {
             await using (ApplicationContext db = new ApplicationContext())
             {

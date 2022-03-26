@@ -1,5 +1,3 @@
-// To-do change "active" to "visible" 
-
 interface IModal {
     containerSource: any;
     show(): void;
@@ -10,15 +8,15 @@ class Modal implements IModal {
     public containerSource: any;
 
     constructor(containerSource) {
-        this.containerSource = containerSource;
+        this.containerSource = document.querySelector(containerSource);
     }
 
     public show(): void {
-        this.containerSource.classList.add("active");
+        this.containerSource.classList.add("visible");
     }
 
     public hide(): void {
-        this.containerSource.classList.remove("active");
+        this.containerSource.classList.remove("visible");
     }
 }
 
@@ -29,8 +27,8 @@ class CategoriesModal extends Modal implements IModal {
     constructor(containerSource, categories) {
         super(categories.containerSource);
 
-        this.containerSource = containerSource;
-        this.categories = categories;
+        this.containerSource = document.querySelector(containerSource);
+        this.categories = document.querySelector(categories);
     }
 
     override show(): void {
@@ -64,10 +62,10 @@ class DropdownModal extends Modal implements IModal {
 
     constructor(containerSource) {
         super(containerSource);
-        this.containerSource.onmouseleave = () => this.hide();
+        this.containerSource.onmouseleave = () => this.hide();   
     }
 
     public toggle(): void {
-        this.containerSource.classList.toggle("active");
+        this.containerSource.classList.toggle("visible");
     }
 }

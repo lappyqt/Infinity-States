@@ -1,0 +1,39 @@
+<div class="top-items">
+    <a class="back-button" href="/articles/all/"><img src="~/img/arrowLeft.svg" alt="Icon">Back</a>
+</div>
+
+<section id="main">
+    <div class="account-form">
+        <div class="block top">
+            <span class="greeting">Create an account</span>
+            <p class="gratitude">First step towards becoming an author</p>
+        </div>
+
+        <div class="block middle">
+            <form method="post" action="CreateAccount">
+                <input name="mail" type="text" placeholder="Your mail..." autocomplete="off">
+                <input name="username" type="text" placeholder="Your username..." autocomplete="off">
+                <input name="password" type="password" placeholder="Your password...">
+                <button type="submit">Sign In</button>
+            </form>
+        </div>
+
+        <div class="block bottom">
+            <p class="account-create-message">Do you have an account? <a href="/home/signin">Sign In</a></p>
+        </div>
+    </div>
+</section>
+
+
+<style>
+    @@media only screen and (max-width: 501px) {
+        .account-create-message {
+            position: relative;
+            top: 30px !important;
+        }   
+    }
+</style>
+
+@section styles {
+    <link rel="stylesheet" type="text/css" href="~/css/layout/login-register.css">
+}

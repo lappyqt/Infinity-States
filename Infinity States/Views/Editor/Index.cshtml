@@ -61,63 +61,52 @@
         <input name="category" type="hidden" value="1" hidden>
         <input class="hidden-content" name="content" type="hidden" hidden>
 
-        <div class="editor-tools">
-            <a title="Bold" class="tool" data-element="bold">B</a>
-            <a title="Italic"class="tool" data-element="italic">I</a>
-            <a title="Underline" class="tool" data-element="underline">U</a>
-            <a title="Title" class="tool" data-element="title">T</a>
-            <a title="Justify left" class="tool" data-element="justifyLeft">JL</a>
-            <a title="Justify center" class="tool" data-element="justifyCenter">JC</a>
-            <a title="Justify right" class="tool" data-element="justifyRight">JR</a>
-            <a title="Justify full" class="tool" data-element="justifyFull">JF</a>
-            <a title="Insert ordered list" class="tool" data-element="insertOrderedList">IO</a>
-            <a title="Insert unordered list" class="tool" data-element="insertUnorderedList">IU</a>
-        </div>
+        <tool-panel enable-tools="true"></tool-panel>
 
         <button type="submit" class="publish">Publish</button>
         <button type="button" name="preview" class="link-button publish">Category</button>
     </form>
 
-    <span class="message" style="display: none;">You are not logged into your account. <a class="link" href="/home/login">Please, Sign In.</a></span>
+    <span class="message" style="display: none;">You are not logged into your account. <a class="link" href="/home/signin">Please, Sign In.</a></span>
 </div>
 
-@if (ViewBag.Username == null) {
-    <script>
-        document.querySelector("button").disabled = true;
-        document.querySelector(".message").style.display = "block";
-    </script>
-}
+<script>
+    const localStorageManager = new LocalStorageManager();
+    const title = document.querySelector("input.title");
+    const content = document.querySelector(".content");
 
-@section scripts {
-    <script type="text/javascript" src="~/build/app.js"></script>
+    window.onsubmit = () => {
+        setHiddenValue(content, document.querySelector(".hidden-content"));
+    }
 
-    <script>
-        appendEditorTools();
+    window.onload = () => {
+        const draft = localStorageManager.getItemJson("article-draft");
 
-        window.onsubmit = () => setHiddenValue(document.querySelector(".content"), document.querySelector(".hidden-content"));
+        title.value = draft.title;
+        content.innerHTML = draft.content;
+    }
 
-        //editor.addEventListener("submit", publish);
-
-        window.addEventListener("load", loadDraft);
-        window.addEventListener("beforeunload", saveDraft);   
-        
-        const categoriesModal = new CategoriesModal
-        (
-            document.querySelector(".modal-container"),
-            document.querySelector(".categories")
-        );
-
-        const categoryButton = document.querySelector(".link-button");
-        const modalSaveButton = document.querySelector(".modal-button");
-        const modalCloseButton = document.querySelector(".modal-close-button");
-        const categoryInput = document.getElementsByName("category")[0];
-
-        categoryButton.onmousedown = () => categoriesModal.show();
-        modalSaveButton.onmousedown = () => {
-            categoryInput.value = categoriesModal.selectedCategory().value;
-            categoriesModal.hide();
+    window.onbeforeunload = () => {
+        const draft = {
+            title: title.value,
+            content: content.innerHTML
         }
 
-        modalCloseButton.onmousedown = () => categoriesModal.hide();
-    </script>
-}
+        localStorageManager.saveItemJson("article-draft", draft);
+    }   
+    
+    const categoriesModal = new CategoriesModal(".modal-container", ".categories");
+
+    const categoryButton = document.querySelector(".link-button");
+    const modalSaveButton = document.querySelector(".modal-button");
+    const modalCloseButton = document.querySelector(".modal-close-button");
+    const categoryInput = document.getElementsByName("category")[0];
+
+    categoryButton.onmousedown = () => categoriesModal.show();
+    modalSaveButton.onmousedown = () => {
+        categoryInput.value = categoriesModal.selectedCategory().value;
+        categoriesModal.hide();
+    }
+
+    modalCloseButton.onmousedown = () => categoriesModal.hide();
+</script>

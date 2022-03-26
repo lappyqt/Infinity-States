@@ -9,9 +9,14 @@
 
   <ItemGroup>
     <Compile Remove="Models\ViewComponents\**" />
+    <Compile Remove="wwwroot\lib\**" />
     <Content Remove="Models\ViewComponents\**" />
+    <Content Remove="wwwroot\lib\**" />
     <EmbeddedResource Remove="Models\ViewComponents\**" />
+    <EmbeddedResource Remove="wwwroot\lib\**" />
     <None Remove="Models\ViewComponents\**" />
+    <None Remove="wwwroot\lib\**" />
+    <TypeScriptCompile Remove="wwwroot\lib\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -32,7 +37,6 @@
     <Folder Include="wwwroot\css\components\" />
     <Folder Include="wwwroot\css\layout\" />
     <Folder Include="wwwroot\css\themes\" />
-    <Folder Include="wwwroot\lib\" />
   </ItemGroup>
 
 </Project>

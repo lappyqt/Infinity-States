@@ -4,7 +4,10 @@ using Infinity_States.Data;
 
 public interface IArticlesRepository
 {
-    Task<Article> GetArticleAsync(int id);
-    Task<List<Article>> GetAllArticlesAsync();
-    Task CreateArticle(Article article);
+    public Task<Article> GetArticle(int id);
+    public Task<List<Article>> GetAllArticles();
+    public Task Create(Article article);
+    public Task Update(int id, MutableArticleData data);
+    public Task<List<Article>> GetArticlesWithFilter(int filter);
+    public Task<List<Article>> GetArticlesByFollowedAuthors(int userId);
 }

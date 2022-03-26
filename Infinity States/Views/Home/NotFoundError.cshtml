@@ -1,0 +1,20 @@
+﻿@section scripts {
+    <script defer src="https://unpkg.com/alpinejs@3.9.1/dist/cdn.min.js"></script>
+}
+
+@section styles {
+    <link rel="stylesheet" type="text/css" href="~/css/base/error.css">
+}
+
+<div x-data="{ commentVisibility: true, consequenceVisibility: false }" id="main">
+    <div class="error-card">
+        <span class="comment" x-show="commentVisibility" x-transition:enter.duration.500ms.opacity x-ref="comment" class="comment">Sorry, the page you’re looking for can’t be found.</span>
+        <span x-show="consequenceVisibility" class="consequence" x-transition:enter.duration.500ms.opacity>The page might have been moved, deleted, or might not exist at all. Check the page address you entered.</span>
+
+        <span class="question" x-on:click="consequenceVisibility = !consequenceVisibility, commentVisibility = !commentVisibility">Why?</span>
+    </div>
+
+    <form action="/">
+        <button type="submit">Back to home</button>
+    </form>
+</div>

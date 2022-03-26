@@ -2,7 +2,7 @@
 
 <div class="user-container">
     <div class="user-data">
-        <img class="user-avatar" src="https://i.pinimg.com/474x/b8/26/a9/b826a91631bfc1acee3da026167af466.jpg" />
+        <img class="user-avatar" src="~/img/default_avatar.jpg" />
         <span class="username">@ViewBag.UserData.Username</span>
 
         <form method="post" class="follow" action="/Users/Follow">
@@ -28,10 +28,6 @@
 <div class="articles">
      @await Component.InvokeAsync("ArticleList")
 </div>
-
-@section scripts {
-    <script type="text/javascript" src="~/build/app.js"></script>
-}
 
 @section styles {
     <link rel="stylesheet" type="text/css" href="~/css/layout/users.css">

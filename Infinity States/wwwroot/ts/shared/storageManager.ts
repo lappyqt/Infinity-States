@@ -10,7 +10,7 @@ class LocalStorageManager implements IStorageManager {
 
     protected checkItemOnNull(item: object) {
         if (typeof(item) != 'object' || item == null) {
-            throw new Error('Item is not an object or is equal to null');
+            throw new Error('Item is not an object or is equals to null');
         } 
     }
 
@@ -24,7 +24,7 @@ class LocalStorageManager implements IStorageManager {
     }
 }   
 
-class SessionStorageManager extends LocalStorageManager implements IStorageManager {
+class SessionStorageManager extends LocalStorageManager {
     override saveItemJson(key: string, item: object): void {
         this.checkItemOnNull(item);
         sessionStorage.setItem(key, JSON.stringify(item));

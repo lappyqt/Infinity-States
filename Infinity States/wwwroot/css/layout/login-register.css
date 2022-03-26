@@ -1,70 +1,180 @@
-header {display: none;}
+.navbar {display: none;}
 
-h2 {
-	font-family: var(--font-title);
-	font-weight: 700;
-	text-align: center;
-	margin-top: 150px;
+* {
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	height: 100%;
+	box-sizing: border-box;
 }
 
-.main {
-	width: 450px;
+body {
+	background-image: url('../../img/back.jpg');
+}
+
+.top-items {
 	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
+	width: 100%;
+	height: 20%;
+	text-align: center;
 }
 
-.main input {
+.top-items > .back-button {
+	position: absolute;
+	width: auto;
+	height: auto;
+	position: fixed;
+	top: 30px;
+	left: 30px;
+	font-weight: 500;
+	background-color: white;
+	padding: 7px 20px;
+	border-radius: 30px;
+	text-decoration: none;
+}
+
+.back-button img {
+	width: 14px;
+	height: 14px;
+	position: relative;
+	right: 6px;
+	top: 1.25px;
+}
+
+#main {
+	width: 100%;
+	height: 100%;
+	display: grid;
+	place-content: center;
+	box-sizing: border-box;
+}
+
+#main input {
+	font-family: var(--font-main);
 	border: none;
 	outline: none;
 	width: 100%;
-	height: 18px;
-	color: #fff;
-	background-color: #000;
+	height: 38px;
+	color: white;
+	background-color: black;
 	font-size: 14px;
-	font-weight: 500;
-	padding: 12px;
+	font-weight: 600;
 	margin-bottom: 10px;
 	border-radius: 8px;
+	padding: 10px;
 }
 
-.main button {
-	margin-top: 5px;
+
+#main button {
+	margin-top: 0;
+	font-family:  var(--font-main);
 	width: 90px;
+	height: 32px;
+	outline: none;
+	border: none;
+	cursor: pointer;
+	background-color: black;
+	color: white;
+	padding: 8px 12px;
+	border-radius: 8px;
+	font-weight: 600;
+	font-size: 14px;
 }
 
-.main a {
+
+.account-form {
+	display: grid;
+	grid-template-rows: repeat(auto-fill, max(183.3px));
+	width: 450px;
+	height: 550px;
+	background-color: white;
+	border-radius: 12px;
+}
+
+.account-form > .block {
+	width: 85%;
 	position: relative;
-	top: 10px;
+	left: 7.5%;
+	height: 100%;
+}
+
+.account-form > .block.top {
+	padding-top: 55px;
+	text-align: center;
+}
+
+.block.top > .greeting {
+	font-size: 20px;
+	font-family:  var(--font-title);   
+	font-weight: bold;
+}
+
+.block.top > .gratitude {
+	width: auto;
+	height: auto;
+	font-size: 14px;
+	font-family:  var(--font-title);
+	color: #b1b1bb;
+}
+
+.account-form > .block.middle {
+	display: table;
+	height: 100%;
+}
+
+.block.middle > form {
+	display: table-cell;
+	vertical-align: middle;
+}
+
+.account-form > .block.bottom {
+	display: table;
+	text-align: center;
+	height: 100%;
+}
+
+.block.bottom > .account-create-message {
+	font-size: 15px;
+	display: table-cell;
+	vertical-align: bottom;
+	padding-bottom: 20px;
+	font-family: var(--font-title);
 	font-weight: 500;
+	color: #6a6a6a;
+}
+
+.account-create-message a {
 	text-decoration: underline;
+	font-weight: 600;
 }
 
-.back {
-	font-weight: 500;
-	position: absolute;
-	left: 30px;
-	top: 30px;
-}
+@media only screen and (max-width: 501px) {
+	body {
+		background: white;
+	}
 
-.back img {
-	margin-right: 5px;
-	position: relative;
-	top: 2px;
-}
+	.account-form {
+		width: 90%;
+		position: relative;
+		left: 5%;
+	}
 
-.errorOutput { position: relative; top: 10px; user-select: none; font-weight: 500; }
+	.account-form > .block {
+		width: 100%;
+		position: relative;
+		left: 0;
+	}
 
+	.block.bottom .account-create-message {
+		vertical-align: top;
+		position: relative;
+		top: 10px;
+	}
 
-@media screen and (max-width: 1001px) { /* Tablets */
-	h2 { margin-top: 100px; }
-	.back { margin-top: 15px; margin-left: 15px; }
-	.main { width: 450px; }
-}
-
-@media screen and (max-width: 501px) { /* Smartphones */
-	h2 { margin-top: 150px; }
-	.back { top: 10px; left: 10px; }
-	.main { width: 80%; margin-left: -12px; }
+	.top-items > .back-button {
+		top: 10px;
+		left: 10px;
+		z-index: 9999;
+		background-color: transparent;
+	}
 }

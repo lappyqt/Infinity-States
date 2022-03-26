@@ -45,6 +45,10 @@
     padding-bottom: 2.5px;
 }
 
+.title a {
+    font-family: var(--font-article-title);
+}
+
 .article-content >
 .author-and-data {
     font-weight: 500;

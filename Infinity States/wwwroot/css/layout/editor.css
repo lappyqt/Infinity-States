@@ -20,7 +20,7 @@ textarea::-webkit-scrollbar {
     outline: none;
 }
 
-.title {
+span.title, input.title {
     border: none;
     outline: none;
     width: 100%;
@@ -61,7 +61,7 @@ textarea::-webkit-scrollbar {
     width: 100% !important;
 }
 
-.editor-tools {
+.tool-panel {
     display: flex;
     margin-bottom: 20px;
     background-color: #efefef;
@@ -72,11 +72,11 @@ textarea::-webkit-scrollbar {
     user-select: none;
 }
 
-.editor-tools .tool {
+.tool-panel .tool {
     cursor: pointer;
 }
 
-.editor-tools .tool:hover {
+.tool-panel .tool:hover {
     color: var(--color-button-hover);
 }
 
@@ -173,20 +173,10 @@ textarea::-webkit-scrollbar {
     transition: opacity 0.5s, visibility 0.5s;
 }
 
-section .active {
+section .visible {
     pointer-events: all;
     visibility: visible;
     opacity: 1;
-    /*animation: categories-modal-animation 0.5s forwards;*/
-}
-
-
-@keyframes categories-modal-animation {
-    0% {
-        opacity: 0;
-    } 100% {
-        opacity: 1;
-    }
 }
 
 .modal-content {
@@ -281,7 +271,7 @@ section .active {
 }
 
 @media screen and (min-width: 999px) { /* Vertical editor */
-    .editor-tools {
+    .tool-panel {
         position: fixed;
         top: 50%;
         left: 0px;

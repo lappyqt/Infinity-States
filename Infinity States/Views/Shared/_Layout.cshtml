@@ -1,4 +1,8 @@
-﻿<!DOCTYPE html>
+﻿@{
+    string username = Context.User.Identity.Name ?? "Unregistered";
+}
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -6,28 +10,54 @@
     @await Html.PartialAsync("CssPartial")
     @RenderSection("styles", false)
     <link rel="shortcut icon" type="image/png" href="~/img/icon.png"/>
+    <script defer src="~/build/components.js"></script>
     <title>@ViewBag.Title</title>
 </head>
 <body>
-    <header>
-        <div class="header-elements">
-            <span class="hd-item logo">Infinity States</span>
-
-            <div class="header-section">
-                <a href="/articles/all/" title="Articles" class="hd-item link"><img src="~/img/compass.svg" alt="Icon" width="18" height="18" class="icon"></a>
-                <a href="/editor" title="Editor" class="hd-item link"><img src="~/img/plus.svg" alt="Icon" width="18" height="18" class="icon"></a>
-                <a href="/account" title="Account" class="hd-item link"><img src="~/img/profile.svg" alt="Icon" width="18" height="18" class="icon"></a>
-                <a title="Search" class="hd-item link search-button"><img src="~/img/search.svg" alt="Icon" width="18" height="18" class="icon"></a>
+    <nav class="navbar">
+        <div class="nav-items">
+            <p class="top-title"><a href="/">Infinity States</a></p>
+            <div class="links">
+                <a id="all-page" href="/articles/all"><img src="~/img/compass.svg"></a>
+                <a id="editor-page" href="/editor"><img src="~/img/plus.svg"></a>
+                <a id="account-page"><img src="~/img/profile.svg"></a>
+                <a id="search-page" href="#"><img src="~/img/search.svg"></a>
             </div>
-            <a class="link menu"><img src="~/img/menu.svg" width="24" height="24"></a>
-
-            <!--<div class="account-modal">
-                <a style="color: white;" href="/account">Your articles</a>
-            </div>-->
         </div>
-    </header>
+
+        <section class="dropdown-modal">
+            <div>
+                <div class="account-data">
+                    <img src="~/img/default_avatar.jpg" alt="icon" id="avatar" width="44" height="44">
+                    <span>@username</span>
+                </div>
+    
+                <ul>
+                    <li><a href="#">Favorite</a></li>
+                    <li><a href="/account">Your articles</a></li>
+                    <li><a href="#">Your lists</a></li>
+                    <li><a href="#">Your posts</a></li>
+                    <li><a href="#">Notifications</a></li>
+                    <li><a href="#">Settings</a></li>
+                    <li><a href="#">Theme: Light</a></li>
+                    <li><a href="#">Launguage: UK</a></li>
+                    
+                    <form method="post" action="/account/logout">
+                        <button type="submit">Sign Out</button>
+                    </form>
+                </ul>
+            </div>
+        </section>
+    </nav>
+    <script src="~/build/app.js" type="text/javascript"></script>
+
     @RenderBody()
     @await Html.PartialAsync("ScriptsPartial")
     @RenderSection("scripts", false)
+
+    <script>
+        const dropdownModal = new DropdownModal(".dropdown-modal");
+        document.getElementById("account-page").onclick = () => dropdownModal.toggle();
+    </script>
 </body>
 </html>

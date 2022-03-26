@@ -50,7 +50,7 @@ namespace Infinity_States.Controllers
 
             using (ApplicationContext db = new ApplicationContext())
             {   
-                int pageSize = 25;
+                short pageSize = 25;
 
                 if (filter <= -1)
                 {
@@ -93,7 +93,7 @@ namespace Infinity_States.Controllers
         }
 
         [HttpGet]
-        public async Task<List<Article>> ByFollowedAuthors()
+        public async Task<IActionResult> Followed()
         {
             using (ApplicationContext db = new ApplicationContext())
             {   
@@ -107,7 +107,13 @@ namespace Infinity_States.Controllers
                     if (article is not null) resultList.Add(article);
                 } 
 
-                return resultList;
+                IndexViewModel indexViewModel = new IndexViewModel
+                {
+                    Articles = resultList,
+                    PageViewModel = null
+                };
+
+                return View(indexViewModel);
             }
         }
 
@@ -116,18 +122,7 @@ namespace Infinity_States.Controllers
         {
             using (ApplicationContext db = new ApplicationContext())
             {
-                 return await db.Articles.Where(data => data.Category == value).ToListAsync();
-            }
-        }
-
-        [Route("/articles/read/{*id}")]
-        [HttpGet]
-        public async Task<object> Read(int id)
-        {
-            using (ApplicationContext db = new ApplicationContext())
-            {
-                Article article = await db.Articles.FindAsync(id);
-                return article;
+                return await db.Articles.Where(data => data.Category == value).ToListAsync();
             }
         }
 

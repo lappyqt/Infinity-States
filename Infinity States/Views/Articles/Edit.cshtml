@@ -13,28 +13,12 @@
         <input class="hidden-content" name="content" type="hidden" hidden>
     </form>
 
-    <div class="editor-tools">
-        <a title="Bold" class="tool" data-element="bold">B</a>
-        <a title="Italic"class="tool" data-element="italic">I</a>
-        <a title="Underline" class="tool" data-element="underline">U</a>
-        <a title="Title" class="tool" data-element="title">T</a>
-        <a title="Justify left" class="tool" data-element="justifyLeft">JL</a>
-        <a title="Justify center" class="tool" data-element="justifyCenter">JC</a>
-        <a title="Justify right" class="tool" data-element="justifyRight">JR</a>
-        <a title="Justify full" class="tool" data-element="justifyFull">JF</a>
-        <a title="Insert ordered list" class="tool" data-element="insertOrderedList">IO</a>
-        <a title="Insert unordered list" class="tool" data-element="insertUnorderedList">IU</a>
-    </div>
+    <tool-panel enable-tools="true"></tool-panel>
 </div>
 
 <script>
     const content = document.querySelector(".content");
     content.innerHTML = content.innerText;
 
-    window.onload = () => appendEditorTools();
     window.onsubmit = () => setHiddenValue(document.querySelector(".content"), document.querySelector(".hidden-content"));
 </script>
-
-@section scripts {
-    <script src="~/build/app.js" type="text/javascript"></script>
-}

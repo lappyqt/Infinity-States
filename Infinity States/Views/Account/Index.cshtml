@@ -3,10 +3,6 @@
 <div class="user-articles-list">
     <span class="title">Your Articles</span>
 
-    <form method="post" class="logout" action="/Account/Logout">
-        <button type="submit">Sign out</button>
-    </form>
-
     <ul class="user-articles">
         @foreach(Article article in ViewBag.Articles)
         {
@@ -25,5 +21,3 @@
         }
     </ul>
 </div>
-
-<script type="text/javascript" src="~/build/app.js"></script>

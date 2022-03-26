@@ -5,6 +5,6 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <_PublishTargetUrl>A:\note\Infinity-States\Infinity States\bin\Release\net5.0\publish\</_PublishTargetUrl>
-    <History>True|2021-11-13T12:27:14.5208996Z;True|2021-11-11T19:49:51.1095346+05:00;</History>
+    <History>True|2022-03-24T12:50:40.3930727Z;True|2022-03-24T17:33:24.2491266+05:00;True|2022-03-24T17:33:05.4588101+05:00;True|2022-03-24T17:31:58.4490704+05:00;True|2021-11-13T17:27:14.5208996+05:00;True|2021-11-11T19:49:51.1095346+05:00;</History>
   </PropertyGroup>
 </Project>
