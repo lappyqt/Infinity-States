@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Infinity_States.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
@@ -13,6 +14,14 @@ namespace Infinity_States.Data
         public ApplicationContext()
         {
             //Database.EnsureCreated();
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Article>().HasGeneratedTsVectorColumn(
+                p => p.SearchVector,
+                "english", 
+                p => new { p.Title, p.Content }).HasIndex(p => p.SearchVector).HasMethod("GIN");
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

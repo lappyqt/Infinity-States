@@ -1,0 +1,47 @@
+[x-cloak] { 
+    display: none;
+}
+
+.display-block {
+    display: block;
+}
+
+.display-none {
+    display: none;
+}
+
+.visible {
+    opacity: 1;
+    visibility: visible;
+    animation: fade-out 0.25s;
+}
+
+.hidden {
+    opacity: 0;
+    visibility: hidden;
+    width: 0;
+    height: 0;
+    overflow: hidden;
+}
+
+@keyframes fade-in {
+    0% {
+        opacity: 1;
+        visibility: visible;
+    }
+    
+    100% {
+        opacity: 0;
+        visibility: hidden;
+    }
+}
+
+@keyframes fade-out {
+    0% {
+        opacity: 0;
+        visibility: hidden;
+    } 100% {
+        opacity: 1;
+        visibility: visible;
+    }
+}

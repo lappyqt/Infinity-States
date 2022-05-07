@@ -1,5 +1,5 @@
 ﻿@{
-    string username = Context.User.Identity.Name ?? "Unregistered";
+    string username = Context.User.Identity.Name;
 }
 
 <!DOCTYPE html>
@@ -10,19 +10,28 @@
     @await Html.PartialAsync("CssPartial")
     @RenderSection("styles", false)
     <link rel="shortcut icon" type="image/png" href="~/img/icon.png"/>
+    <script defer src="~/build/alpine.js"></script>
     <script defer src="~/build/components.js"></script>
     <title>@ViewBag.Title</title>
 </head>
 <body>
-    <nav class="navbar">
+    <nav x-data="{ accountModal: '', searchView: false }" x-init="accountModal = new DropdownModal('.dropdown-modal')" class="navbar">
         <div class="nav-items">
             <p class="top-title"><a href="/">Infinity States</a></p>
-            <div class="links">
+            <div x-cloak class="links" :class="{ 'hidden': searchView }">
                 <a id="all-page" href="/articles/all"><img src="~/img/compass.svg"></a>
                 <a id="editor-page" href="/editor"><img src="~/img/plus.svg"></a>
-                <a id="account-page"><img src="~/img/profile.svg"></a>
-                <a id="search-page" href="#"><img src="~/img/search.svg"></a>
+
+                @if (username != null) { <a id="account-page" x-on:click="accountModal.toggle()"><img src="~/img/profile.svg"></a> }
+                else {  <a id="account-page" href="/account"><img src="~/img/profile.svg"></a>  }
+                <a id="search-page" x-on:click="searchView = !searchView" href="#"><img src="~/img/search.svg"></a>
             </div>
+
+            <section x-show="searchView" x-transition:enter.duration.250ms x-on:mousedown.outside="searchView = false" class="search-container">
+                <input x-cloak x-on:keyup.escape="searchView = false" 
+                x-on:keyup.enter="window.location = window.origin + '/search?req=' + $el.value; $el.value = ''"
+                type="text" class="search" placeholder="Your search request...">
+            </section>
         </div>
 
         <section class="dropdown-modal">
@@ -43,6 +52,7 @@
                     <li><a href="#">Launguage: UK</a></li>
                     
                     <form method="post" action="/account/logout">
+                        @Html.AntiForgeryToken()
                         <button type="submit">Sign Out</button>
                     </form>
                 </ul>
@@ -54,10 +64,5 @@
     @RenderBody()
     @await Html.PartialAsync("ScriptsPartial")
     @RenderSection("scripts", false)
-
-    <script>
-        const dropdownModal = new DropdownModal(".dropdown-modal");
-        document.getElementById("account-page").onclick = () => dropdownModal.toggle();
-    </script>
 </body>
 </html>

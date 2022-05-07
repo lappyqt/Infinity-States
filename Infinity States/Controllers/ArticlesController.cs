@@ -6,11 +6,27 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
+using Infinity_States.Repositories;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Hosting;
+using Infinity_States.Services;
 
 namespace Infinity_States.Controllers
 {
+    [AutoValidateAntiforgeryToken]
     public class ArticlesController : Controller
     {
+        private readonly IArticlesRepository _articlesRepository;
+        private readonly IWebHostEnvironment _enviroment;
+        private readonly FileHandling _fileHandling;
+
+        public ArticlesController(IWebHostEnvironment env)
+        {
+            _articlesRepository = new ArticlesRepository();
+            _enviroment = env;
+            _fileHandling = new FileHandling();
+        }
+
         public IActionResult Index()
         {
             return RedirectToAction("All");
@@ -20,11 +36,8 @@ namespace Infinity_States.Controllers
         [HttpGet]
         public async Task<IActionResult> Article(int id)
         {
-            using (ApplicationContext db = new ApplicationContext())
-            {
-                ViewBag.Article = (Article) await db.Articles.FindAsync(id);
-                return View();
-            }
+            var article = await _articlesRepository.GetArticle(id);
+            return View(article); 
         }
 
         [HttpGet]
@@ -84,15 +97,6 @@ namespace Infinity_States.Controllers
         }
 
         [HttpGet]
-        public async Task<List<Article>> GetAll()
-        {
-            using (ApplicationContext db = new ApplicationContext())
-            {   
-                return await db.Articles.ToListAsync();
-            }
-        }
-
-        [HttpGet]
         public async Task<IActionResult> Followed()
         {
             using (ApplicationContext db = new ApplicationContext())
@@ -120,26 +124,22 @@ namespace Infinity_States.Controllers
         [HttpGet]
         public async Task<List<Article>> Filter(int value)
         {
-            using (ApplicationContext db = new ApplicationContext())
-            {
-                return await db.Articles.Where(data => data.Category == value).ToListAsync();
-            }
+            return await _articlesRepository.GetArticlesWithFilter(value);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Update(int id, string poster, string title, string content)
+        public async Task<IActionResult> Update(int id, IFormFile poster, string title, string content)
         {
-            using (ApplicationContext db = new ApplicationContext())
-            {
-                var article = await db.Articles.FindAsync(id);
+            var article = await _articlesRepository.GetArticle(id);
 
-                article.Poster = poster;
-                article.Title = title;
-                article.Content = content;
+            string path = $"{_enviroment.WebRootPath}\\files\\images\\{poster.FileName}";
+            string previousPosterPath = $"{_enviroment.ContentRootPath}\\wwwroot\\{article.Poster}";
+            await _fileHandling.UploadFileWithDeletingPrevious(poster, path, previousPosterPath);
 
-                await db.SaveChangesAsync();
-                return RedirectToAction("Index", "Account");
-            }
+            MutableArticleData articleData = new MutableArticleData(poster, title, content);
+            await _articlesRepository.Update(id, articleData);
+
+            return RedirectToAction("Index", "Account");
         }
     }
 }

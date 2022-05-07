@@ -10,6 +10,7 @@ using System.Security.Claims;
 
 namespace Infinity_States.Controllers
 {
+    [AutoValidateAntiforgeryToken]
     public class UsersController : Controller
     {
         private ApplicationContext db { get; set; }

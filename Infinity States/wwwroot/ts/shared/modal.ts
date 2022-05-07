@@ -62,7 +62,7 @@ class DropdownModal extends Modal implements IModal {
 
     constructor(containerSource) {
         super(containerSource);
-        this.containerSource.onmouseleave = () => this.hide();   
+        this.containerSource.onmouseleave= () => this.hide();   
     }
 
     public toggle(): void {

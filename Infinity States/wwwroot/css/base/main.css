@@ -2,6 +2,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
 @import url('../master.css');
 @import url('animations.css');
+@import url('shared.css');
 
 * {
     padding: 0;
@@ -25,6 +26,6 @@ a {
     background-color: transparent;
 }
 
-img { border-radius: 10px; max-height: 500px; }
+img { border-radius: 12px; max-height: 450px; }
 
 li { list-style: none; }

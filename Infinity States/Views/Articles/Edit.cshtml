@@ -2,13 +2,27 @@
     ViewBag.Title = ViewBag.Article.Title + " - Edit";
 }
 
-<div class="textblock">
-    <form class="editorForm" method="post" action="/Articles/Update/">
+<div class="textblock" x-data="{ previewView: true, fileContainerView: false }">
+    <form class="editorForm" method="post" action="/Articles/Update/" enctype="multipart/form-data">
+        @Html.AntiForgeryToken()
         <input name="id" type="hidden" id="articleId" value="@ViewBag.Article.Id">
-        <input name="poster" type="text" class="poster" placeholder="Poster url..." value="@ViewBag.Article.Poster">
+        
+        <div x-show="fileContainerView" x-cloak x-on:drop="previewView = true, fileContainerView = false"
+        x-transition:enter.duration.320ms class="file-container">
+
+            <span id="main-title">Place your poster here or <a>open explorer</a></span>
+            <input name="poster" x-on:change.prevent="PosterPreview.showPreview($el.files[0], $el), previewView = true, fileContainerView = false" type="file" class="poster" hidden>
+        </div>
+
+        <div x-show="previewView" x-cloak x-transition:enter.duration.300ms class="poster-preview">
+            <img class="poster" src="@ViewBag.Article.Poster">
+            <span x-on:click="previewView = false, fileContainerView = true, PosterPreview.clearFileInput(fileInput)" class="preview-close"><img width="16" height="16" src="~/img/exit.svg"></span>
+        </div>
+
         <input name="title" type="text" class="title" placeholder="Title..." value="@ViewBag.Article.Title">
         <div contenteditable="true" class="content" data-placeholder="Write an interesting story...">@ViewBag.Article.Content</div>
         <button type="submit" class="publish">Update</button>
+        <button x-on:click="window.location = `${window.origin}/account`" class="link-button">Discard</button>
 
         <input class="hidden-content" name="content" type="hidden" hidden>
     </form>
@@ -21,4 +35,20 @@
     content.innerHTML = content.innerText;
 
     window.onsubmit = () => setHiddenValue(document.querySelector(".content"), document.querySelector(".hidden-content"));
+
+    const fileContainer = document.querySelector(".file-container");
+    const fileInput = document.querySelector("input.poster");
+
+    document.ondrop = (event) => event.preventDefault();  
+    document.ondragenter = (event) => event.preventDefault();
+    document.ondragleave = (event) => event.preventDefault(); 
+    document.ondragover = (event) => event.preventDefault();
+
+    window.onload = () => {
+        PosterPreview.openExplorer
+        (
+            document.querySelector(".file-container a"),
+            document.querySelector(".file-container input")
+        );  
+    }
 </script>

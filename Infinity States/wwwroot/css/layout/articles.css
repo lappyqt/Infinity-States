@@ -85,6 +85,8 @@ button {
     position: absolute;
     left: 50%;
     transform: translate(-50%, 0);
+    display: flex;
+    align-items: center;
 }
 
 .user-articles-list span {
@@ -92,14 +94,10 @@ button {
     float: left;
 }
 
-.user-articles-list .logout {
+.user-articles-list .link-button {
+    width: 120px;
     position: absolute;
     right: 0;
-}
-
-.logout button {
-	margin: 0;
-    width: 90px;
 }
 
 .user-articles-list ul {
@@ -111,12 +109,11 @@ button {
 .user-articles-list a { font-weight: 500; }
 
 .user-article {
-    padding: 10px;
-    border-radius: 8px;
-    transition: all 0.2s;
+    padding: 10px 15px;
+    border-radius: 10px;
+    border: 1px solid #ababab;
+    margin-bottom: 10px;
 }
-
-.user-article:hover { background-color: var(--color-user-article-hover); }
 
 .icon-button {
     float: right;
@@ -128,7 +125,7 @@ button {
     font-weight: 500;
     padding: 20px;
     border: 1px solid;
-    border-radius: 8px;
+    border-radius: 12px;
 }
 
 .content-create-message p {

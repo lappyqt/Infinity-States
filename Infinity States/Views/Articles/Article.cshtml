@@ -1,13 +1,10 @@
 ﻿@using Infinity_States.Data
-
-@{
-    ViewBag.Title = ViewBag.Article.Title;
-}
+@model Article
 
 <div class="textblock">
-    <img class="poster" src="@ViewBag.Article.Poster">
-    <span name="title" type="text" class="title">@ViewBag.Article.Title</span> <br>
-    <a class="author-link" href="/users/@ViewBag.Article.AuthorId">@ViewBag.Article.Author</a>
+    <img class="poster" src="@Model.Poster">
+    <span name="title" type="text" class="title">@Model.Title</span> <br>
+    <a class="author-link" href="/users/@Model.AuthorId">@Model.Author</a>
     <pre class="content"></pre>
 </div>
 
@@ -20,6 +17,6 @@
     window.addEventListener("scroll", onScroll);
     up.addEventListener("click", scrollToTop);
     
-    content.innerHTML = "@ViewBag.Article.Content";
+    content.innerHTML = "@Model.Content";
     content.innerHTML = content.innerText;
 </script>

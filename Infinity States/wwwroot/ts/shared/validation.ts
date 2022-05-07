@@ -1,19 +1,11 @@
-/*  
-    Идея в том, чтобы последовательно проходиться по элементам формы,
-    узнавать тип инпута и проводить валидацию по соответствующему типу,
-    например: если у инпута тип password, то метод валидации validatePassword().
-    
-    В случае ошибки менять класс например на .error
-*/
-
-enum InputTypes {
-    "Text" = "text",
-    "Email" = "email",
-    "Password" = "password"
+enum InputNames {
+    "Username" = "username",
+    "Mail" = "mail",
+    "Password" = "password",
 }
 
 interface IFormValidation {
-    validate(): boolean;
+    validate();
     nullValidation(input: any): boolean;
     emailValidation(input: any): boolean;
     passwordValidation(input: any): boolean;
@@ -21,51 +13,77 @@ interface IFormValidation {
 
 class FormValidation implements IFormValidation {
     public form: any;
+    private errorLog: any;
 
-    constructor(form: any) {
+    constructor(form: any, errorLogId: string) {
         this.form = form;
+        this.errorLog = document.getElementById(errorLogId);
     }
 
-    public validate(): boolean {
+    private addErrorLogLine(message: string) {
+        this.errorLog.innerHTML += message;
+    }
+
+    private removeErrorLogLine(message: string) {
+        this.errorLog.innerHTML = this.errorLog.innerHTML.replace(message, "");
+    }
+
+    public validate() {
         let input: any;
+        let validateProcess = [];
 
-        /*
-            Когда я допишу код, здесь может быть такая ситуация,
-            что если например пароль введен, а имя пользователя нет,
-            то функция validate все равно вернет true т.к. input пароля идет последним...
+        this.errorLog.innerHTML = "";
 
-            В этом случае необходимо добавтить массив, куда будут добавляться результаты каждой валидации (надо еще и выполнять данный метод, чтобы он выводил пользователю ошибку)
-            Ну и в конце я просто проверяю если есть хоть один false, то валидация не будет пройдена
-        */
-
-        for (input of form.elements) {
-            switch (input.type) {
-                case InputTypes.Text: return this.nullValidation(input); 
-                case InputTypes.Email: return this.emailValidation(input); 
-                case InputTypes.Password: return this.passwordValidation(input); 
+        for (input of this.form.elements) {
+            if (input.hasAttribute('name')) {
+                if (input.name == InputNames.Mail) validateProcess.push(this.emailValidation(input));
+                if (input.name == InputNames.Username) validateProcess.push(this.nullValidation(input));
+                if (input.name == InputNames.Password) validateProcess.push(this.passwordValidation(input));
             }
         }
+
+        if (!validateProcess.includes(false)) {
+            return true;
+        }
+
+        return false;
     }
 
-    nullValidation(input: any): boolean {
+    public nullValidation(input: any): boolean {
+        let message = "🔥 Please enter a username <br>";
+
         if (input.value.length < 1) {
+            this.addErrorLogLine(message);
             return false;
         }
 
+        this.removeErrorLogLine(message);
         return true;
     }
 
-    emailValidation(input: any): boolean {
-        return
-    }
-
-    passwordValidation(input: any): boolean {
-        const regularExpression = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z\\!?@#$%^&*+-]{6,}$/;
+    public emailValidation(input: any): boolean {
+        const regularExpression = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+        let message = "🔥 Please enter a valid mail <br>";
 
         if (!input.value.match(regularExpression)) {
+            this.addErrorLogLine(message);
             return false;
         }
 
+        this.removeErrorLogLine(message);
+        return true;
+    }
+
+    public passwordValidation(input: any): boolean {
+        const regularExpression = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z\\!?@#$%^&*+-]{6,}$/;
+        let message = "🔥 Password min 6 characters (1 upper case and number) <br>";
+
+        if (!input.value.match(regularExpression)) {
+            this.addErrorLogLine(message);
+            return false;
+        }
+
+        this.removeErrorLogLine(message);
         return true;
     }
 }

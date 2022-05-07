@@ -4,7 +4,7 @@ using Infinity_States.Data;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 
-namespace Infinity_States.Services;
+namespace Infinity_States.Repositories;
 
 public class ArticlesRepository : IArticlesRepository
 {
@@ -30,11 +30,24 @@ public class ArticlesRepository : IArticlesRepository
     {
         Article article = await db.Articles.FirstOrDefaultAsync(x => x.Id == id);
 
-        article.Poster = data.Poster;
-        article.Title = data.Title;
-        article.Content = data.Poster;
+        string pathToPoster = $"/files/images/{data.Poster.FileName}" ?? article.Poster;
 
+        article.Poster = pathToPoster;
+        article.Title = data.Title;
+        article.Content = data.Content;
+ 
         await db.SaveChangesAsync();
+    }
+
+    public async Task Delete(int id, string author)
+    {
+        Article article = db.Articles.FirstOrDefault(x => x.Id == id);
+
+        if (article != null && article.Author == author)
+        {
+            db.Articles.Remove(article);
+            await db.SaveChangesAsync();
+        }
     }
 
     public async Task<List<Article>> GetArticlesWithFilter(int filter)

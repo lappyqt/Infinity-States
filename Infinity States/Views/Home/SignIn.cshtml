@@ -11,14 +11,23 @@
 
         <div class="block middle">
             <form method="post">
-                <input name="username" type="text" placeholder="Your username..." autocomplete="off">
-                <input name="password" type="password" placeholder="Your password...">
+                <input name="username" type="text" placeholder="Your username..." required>
+                <input name="password" type="password" placeholder="Your password..." required>
                 <button type="submit">Sign In</button>
             </form>
         </div>
 
         <div class="block bottom">
-            <p class="account-create-message">New to Infinity States? <a href="/home/signup">Sign Up</a></p>
+            <form method="post"> 
+                <div class="dilimiter">
+                    <div class="line"></div>
+                    <span>or</span>
+                    <div class="line"></div>
+                </div>
+                <button id="external-login">Sign in with Google</button>
+            </form>
+            
+            <p class="account-create-message">New to Infinity States? <a href="/home/signup">Sign up</a></p>
         </div>
     </div>
 </section>

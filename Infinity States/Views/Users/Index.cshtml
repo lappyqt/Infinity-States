@@ -6,6 +6,7 @@
         <span class="username">@ViewBag.UserData.Username</span>
 
         <form method="post" class="follow" action="/Users/Follow">
+            @Html.AntiForgeryToken()
             <input type="hidden" name="author" value="@ViewBag.UserData.Username" class="author" />
             
             @if (ViewBag.Followed)

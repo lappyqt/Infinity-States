@@ -8,14 +8,26 @@ using System.Security.Claims;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Http;
-using Infinity_States.Modules;
+using Microsoft.AspNetCore.Hosting;
+using System.IO;
+using Microsoft.EntityFrameworkCore;
 
-using HashCode = Infinity_States.Modules.HashCode;
+using HashCode = Infinity_States.Models.HashCode;
 
 namespace Infinity_States.Controllers
 {
+    [AutoValidateAntiforgeryToken]
     public class HomeController : Controller
     {
+        private readonly IWebHostEnvironment _enviroment;
+        private readonly ApplicationContext _context;
+
+        public HomeController(IWebHostEnvironment env)
+        {
+            _enviroment = env;
+            _context = new ApplicationContext();
+        }
+
         public IActionResult Index()
         {
             return View();
@@ -31,10 +43,34 @@ namespace Infinity_States.Controllers
             return View();
         }
 
+        [Route("/search")]
+        public List<Article> Search(string req)
+        {
+            List<Article> articles = _context.Articles.Where(x => x.SearchVector.Matches(req)).ToList();
+            return articles;
+        }
+
         [Route("/notfound")]
         public IActionResult NotFoundError()
         {
             return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> UploadFile(IFormFile file)
+        {
+            if (file != null)
+            {
+                //string filePath = $"/files/image/{file.FileName}";
+                string fullPath = $"{_enviroment.WebRootPath}\\files\\images\\{file.FileName}";
+                
+                using (FileStream fs = new FileStream(fullPath, FileMode.Create))
+                {
+                    await file.CopyToAsync(fs);
+                }
+            }
+
+            return RedirectToAction("Index");
         }
 
         [HttpPost]
@@ -43,7 +79,7 @@ namespace Infinity_States.Controllers
             using (ApplicationContext db = new ApplicationContext())
             {
                 HashCode hashCode;
-                User user = new User { Mail = mail, Username = username, Password = hashCode.GenerateHashCode(password), Authors = new List<string>() };
+                User user = new User { Mail = mail, Username = username, Password = hashCode.GenerateHashedPassword(password), Authors = new List<string>() };
                 db.Users.Add(user);
                 await db.SaveChangesAsync();
             }
@@ -59,7 +95,7 @@ namespace Infinity_States.Controllers
                 HashCode hashCode;
                 User user = db.Users.Where(data => data.Username == username).FirstOrDefault();
 
-                if (user.Password == hashCode.GenerateHashCode(password)) 
+                if (user.Password == hashCode.GenerateHashedPassword(password)) 
                 {
                     List<Claim> claims = new List<Claim>
                     {

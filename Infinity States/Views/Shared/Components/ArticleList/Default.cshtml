@@ -8,7 +8,7 @@
             <div class="article-poster"><img src="@article.Poster"></div>
             <div class="article-content">
                 <p class="title"><a href="/articles/article/@article.Id">@article.Title</a></p>
-                <p class="author-and-data"><a href="/users/@article.AuthorId" class="author">@article.Author</a> • @article.PublicationDateTime.ToString("dd/MM/yy")</p>
+                <p class="author-and-data"><a href="/users/@article.AuthorId" class="author">@article.Author</a> • @article.PublicationDateTime.ToString("dd.MM.yy")</p>
                 <span class="first-paragraph">
                     @article.Content.Split(Environment.NewLine.ToCharArray()).FirstOrDefault()
                 </span>

@@ -9,7 +9,9 @@
 }
 
 body {
-	background-image: url('../../img/back.jpg');
+	background-image: url('https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/549e9b77-4c90-4c7f-8d0e-772a4ba70576/ddy3bu3-40eaae73-1bcc-4b6b-8f7c-5744667e37f1.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzU0OWU5Yjc3LTRjOTAtNGM3Zi04ZDBlLTc3MmE0YmE3MDU3NlwvZGR5M2J1My00MGVhYWU3My0xYmNjLTRiNmItOGY3Yy01NzQ0NjY3ZTM3ZjEuanBnIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.T1KQP5AY4mDDr4jZA_S70rwwBc8GGyZuDI-9cV3XhcQ');
+	background-position: center center;
+	background-size: cover;
 }
 
 .top-items {
@@ -85,7 +87,7 @@ body {
 .account-form {
 	display: grid;
 	grid-template-rows: repeat(auto-fill, max(183.3px));
-	width: 450px;
+	width: 430px;
 	height: 550px;
 	background-color: white;
 	border-radius: 12px;
@@ -133,6 +135,33 @@ body {
 	height: 100%;
 }
 
+.block.bottom > form {
+	display: table-cell;
+	position: absolute;
+	height: min-content;
+}
+
+form > .dilimiter {
+	display: flex;
+	height: min-content;
+	align-items: center;
+}
+
+.dilimiter > .line {
+	width: 100vh;
+	height: 1px;
+	background-color: black;
+}
+
+form > #external-login {
+	width: 100%;
+	background-color: white;
+	color: black;
+	border: 1px solid;
+	height: 34px;
+	margin-top: 25px;
+}
+
 .block.bottom > .account-create-message {
 	font-size: 15px;
 	display: table-cell;
@@ -146,6 +175,20 @@ body {
 .account-create-message a {
 	text-decoration: underline;
 	font-weight: 600;
+}
+
+.validation-process {
+	margin-top: 10px;
+	padding-left: 10px;
+	padding-top: 10px;
+	backdrop-filter: blur(50px);
+	border-radius: 12px;
+}
+
+.validation-process span {
+	color: white;
+	font-size: 15px;
+	font-weight: 500;
 }
 
 @media only screen and (max-width: 501px) {
@@ -163,12 +206,6 @@ body {
 		width: 100%;
 		position: relative;
 		left: 0;
-	}
-
-	.block.bottom .account-create-message {
-		vertical-align: top;
-		position: relative;
-		top: 10px;
 	}
 
 	.top-items > .back-button {

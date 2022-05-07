@@ -9,12 +9,28 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
+using Infinity_States.Repositories;
+using Microsoft.AspNetCore.Hosting;
+using System.IO;
+using Infinity_States.Services;
 
 namespace Infinity_States.Controllers
 {
     [Authorize]
+    [AutoValidateAntiforgeryToken]
     public class AccountController : Controller
     {
+        private readonly IArticlesRepository _articlesRepository;
+        private IWebHostEnvironment _enviroment;
+        private FileHandling _fileHandling;
+
+        public AccountController(IWebHostEnvironment env)
+        {
+            _articlesRepository = new ArticlesRepository();
+            _enviroment = env;
+            _fileHandling = new FileHandling();
+        }
+
         public async Task<IActionResult> Index()
         {
             using (ApplicationContext db = new ApplicationContext())
@@ -45,19 +61,22 @@ namespace Infinity_States.Controllers
 
         public async Task<IActionResult> DeleteArticle(int id)
         {
-            using (ApplicationContext db = new ApplicationContext())
-            {
-                string author = HttpContext.User.Identity.Name;
-                Article article = await db.Articles.Where(data => data.Id == id).FirstOrDefaultAsync();
+            Article article = await _articlesRepository.GetArticle(id);
+            string posterPath = $"{_enviroment.ContentRootPath}\\wwwroot\\{article.Poster}";
 
-                if (article.Author == author)
-                {
-                    db.Articles.Remove(article);
-                    await db.SaveChangesAsync();
-                }
+            string author = HttpContext.User.Identity.Name;
+            await _articlesRepository.Delete(id, author);
+            await _fileHandling.DeleteFile(posterPath);
 
-                return RedirectToAction("Index");
-            }
+            return RedirectToAction("Index");
+        }
+
+        public IActionResult Delete(string name)
+        {
+            string fullPath = $"{_enviroment.ContentRootPath}\\files\\images\\{name}";
+
+
+            return Content(fullPath);
         }
     }
 }
