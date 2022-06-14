@@ -20,14 +20,11 @@
         </form>
     </div>
 
-    <div class="content-choose">
-        <span class="active">Articles</span>
-        <span class="freeze">Posts</span>
-    </div>
+    <content-type-select types="Articles; Posts"></content-type-select>
 </div>
 
 <div class="articles">
-     @await Component.InvokeAsync("ArticleList")
+    @await Component.InvokeAsync("ArticleList")
 </div>
 
 @section styles {

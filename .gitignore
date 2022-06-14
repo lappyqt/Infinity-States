@@ -9,6 +9,8 @@
 /Infinity States/obj
 /Infinity States/.config
 /Infinity States/wwwroot/build
+/Infinity States/wwwroot/files
+/Infinity States/node_modules
 
 /InfinityStates.Tests/.vs
 /InfinityStates.Tests/.vscode

@@ -20,6 +20,10 @@
             </div>
         </li>
     }
+
+    @if (Model.Articles.Count() < 1) {
+        <span>There are no articles on this page yet</span>
+    }
 </ul>
 
 <script>

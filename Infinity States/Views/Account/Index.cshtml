@@ -2,8 +2,12 @@
 
 <div id="main">
     <div class="user-articles-list">
-        <span class="title">Your articles</span>
-        <button class="link-button">Import article</button>
+        <div class="title-bar">
+            <span class="title">Your articles</span>
+            <button class="link-button">Import article</button>
+        </div>
+        
+        <content-type-select types="Published; Drafts"></content-type-select>
 
         <ul class="user-articles">
             @foreach(Article article in ViewBag.Articles)

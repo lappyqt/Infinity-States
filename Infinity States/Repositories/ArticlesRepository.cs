@@ -15,7 +15,7 @@ public class ArticlesRepository : IArticlesRepository
         return await db.Articles.FindAsync(id);
     } 
 
-    public async Task<List<Article>> GetAllArticles()
+    public async Task<IEnumerable<Article>> GetAllArticles()
     {
         return await db.Articles.ToListAsync();
     }
@@ -50,12 +50,12 @@ public class ArticlesRepository : IArticlesRepository
         }
     }
 
-    public async Task<List<Article>> GetArticlesWithFilter(int filter)
+    public async Task<IEnumerable<Article>> GetArticlesWithFilter(int filter)
     {
         return await db.Articles.Where(x => x.Category == filter).ToListAsync();
     }
 
-    public async Task<List<Article>> GetArticlesByFollowedAuthors(int userId)
+    public async Task<IEnumerable<Article>> GetArticlesByFollowedAuthors(int userId)
     {
         User user = await db.Users.FindAsync(userId);
         List<Article> result = new List<Article>();

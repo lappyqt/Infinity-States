@@ -1,22 +1,23 @@
 ﻿@using Infinity_States.Data
+@using System.Globalization
 @model Article
 
 <div class="textblock">
     <img class="poster" src="@Model.Poster">
     <span name="title" type="text" class="title">@Model.Title</span> <br>
-    <a class="author-link" href="/users/@Model.AuthorId">@Model.Author</a>
+
+    <div class="author-and-date">
+        <img class="avatar" src="~/img/default_avatar.jpg"><a class="author-username" href="/users/@Model.AuthorId">@Model.Author</a>
+        <span class="publication-time">@Model.PublicationDateTime.ToString("MMMM dd, yyyy", CultureInfo.InvariantCulture)</span>
+    </div>
+
+    <div class="line"></div>
     <pre class="content"></pre>
 </div>
 
-<a class="up">Up</a>
-
 <script>
-    const content = document.querySelector(".content");
-    const up = document.querySelector(".up");
+    const content = document.querySelector('pre.content');
 
-    window.addEventListener("scroll", onScroll);
-    up.addEventListener("click", scrollToTop);
-    
     content.innerHTML = "@Model.Content";
     content.innerHTML = content.innerText;
 </script>
