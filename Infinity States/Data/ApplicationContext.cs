@@ -26,7 +26,7 @@ namespace Infinity_States.Data
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseNpgsql("Host = localhost; Port = 5432; Database = ISData1; Username = postgres; Password = adfQ312;");
+            optionsBuilder.UseNpgsql("Host = ec2-34-253-119-24.eu-west-1.compute.amazonaws.com; Port = 5432; Database = d90enbc0049crg; Username = qrbmtayikihwdr; Password = e2af8ad06fd8d5dc6c40e13ff9223265507594bff930879bfffc861286a13fd4;");
         }
     }
 }
