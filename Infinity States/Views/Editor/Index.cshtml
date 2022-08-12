@@ -59,13 +59,13 @@
         <div x-show="fileContainerView" x-cloak x-on:drop="previewView = true, fileContainerView = false"
         x-transition:enter.duration.320ms class="file-container">
 
-            <span id="main-title">Place your poster here or <a>open explorer</a></span>
-            <input name="poster" x-on:change.prevent="PosterPreview.showPreview($el.files[0], $el), previewView = true, fileContainerView = false" type="file" class="poster" hidden>
+            <span id="main-title">Place your poster here or <a onclick="fileInput.click()">open explorer</a></span>
+            <input name="poster" x-on:change.prevent="previewView = true, fileContainerView = false" type="file" class="poster" hidden>
         </div>
 
         <div x-show="previewView" x-cloak x-transition:enter.duration.300ms class="poster-preview">
             <img class="poster">
-            <span x-on:click="previewView = false, fileContainerView = true, PosterPreview.clearFileInput(fileInput)" class="preview-close"><img width="16" height="16" src="~/img/exit.svg"></span>
+            <span x-on:click="previewView = false, fileContainerView = true, fileInput.value = ''" class="preview-close"><img width="16" height="16" src="~/img/exit.svg"></span>
         </div>
 
         <input name="title" type="text" class="title" placeholder="Story title..."/>
@@ -81,18 +81,17 @@
 </div>
 
 <script>
-    const localStorageManager = new LocalStorageManager();
+    const localStorageManager = new Public.LocalStorageManager();
     const title = document.querySelector("input.title");
     const content = document.querySelector(".content");
 
     const fileContainer = document.querySelector(".file-container");
+    const posterContainer = document.querySelector("img.poster");
     const fileInput = document.querySelector("input.poster");
 
-    document.onsubmit = () => setHiddenValue(content, document.querySelector(".hidden-content"));
+    const posterPreview = new Editor.PosterPreview(fileContainer, posterContainer, fileInput);
 
-    document.ondrop = (event) => event.preventDefault();  
-    document.ondragenter = (event) => event.preventDefault();
-    document.ondragleave = (event) => event.preventDefault(); 
+    document.onsubmit = () => Helpers.FormHelper.setHiddenValue(content, document.querySelector(".hidden-content"));
     document.ondragover = (event) => event.preventDefault();
 
     window.onload = () => {
@@ -100,14 +99,6 @@
 
         title.value = draft.title;
         content.innerHTML = draft.content;
-
-        PosterPreview.openExplorer
-        (
-            document.querySelector(".file-container a"),
-            document.querySelector(".file-container input")
-        );
-
-        PosterPreview.showPreviewOnDrop(fileContainer, fileInput);
     }
 
     window.onbeforeunload = () => {
@@ -119,7 +110,7 @@
         localStorageManager.saveItemJson("article-draft", draft);
     }   
     
-    const categoriesModal = new CategoriesModal(".modal-container", ".categories");
+    const categoriesModal = new Public.CategoriesModal(".modal-container", ".categories");
 
     const categoryButton = document.querySelector(".link-button");
     const modalSaveButton = document.querySelector(".modal-button");

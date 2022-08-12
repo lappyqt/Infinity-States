@@ -43,11 +43,21 @@ namespace Infinity_States.Controllers
             return View();
         }
 
+
         [Route("/search")]
-        public List<Article> Search(string req)
+        [HttpGet]
+        [IgnoreAntiforgeryToken]
+        public IActionResult Search(string q)
         {
-            List<Article> articles = _context.Articles.Where(x => x.SearchVector.Matches(req)).ToList();
-            return articles;
+            List<Article> articles = _context.Articles.Where(x => x.SearchVector.Matches(q)).ToList();
+
+            IndexViewModel indexViewModel = new IndexViewModel
+            {
+                Articles = articles,
+                PageViewModel = null
+            };
+
+            return View(indexViewModel);
         }
 
         [Route("/notfound")]

@@ -29,3 +29,29 @@ a {
 img { border-radius: 12px; max-height: 450px; }
 
 li { list-style: none; }
+
+.content-type-select {
+    width: 100%;
+    margin-top: 5px;
+    word-spacing: 5px;
+    user-select: none;
+}
+
+.content-type-select span {
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 400;
+    font-family: var(--font-title);
+    color: #8c8c8c;
+}
+
+.content-type-select > span.selected {
+    color: black;
+}
+
+.content-type-select > .line {
+    width: 100%;
+    height: 1px;
+    background-color: black;
+    margin-top: 5px;
+}

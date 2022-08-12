@@ -1,0 +1,38 @@
+namespace Public {
+    export interface IStorageManager {
+        saveItemJson(key: string, item: object): void;
+        getItemJson(key: string): object;
+    }
+    
+    export class LocalStorageManager implements IStorageManager {
+        public get storage() {
+            return localStorage;
+        }
+    
+        protected checkItemOnNull(item: object) {
+            if (typeof(item) != 'object' || item == null) {
+                throw new Error('Item is not an object or is equals to null');
+            } 
+        }
+    
+        public saveItemJson(key: string, item: object): void {
+            this.checkItemOnNull(item);
+            localStorage.setItem(key, JSON.stringify(item));
+        }
+    
+        public getItemJson(key: string): object {   
+            return JSON.parse(localStorage.getItem(key));
+        }
+    }   
+    
+    export class SessionStorageManager extends LocalStorageManager {
+        override saveItemJson(key: string, item: object): void {
+            this.checkItemOnNull(item);
+            sessionStorage.setItem(key, JSON.stringify(item));
+        }
+    
+        override getItemJson(key: string): object {
+            return JSON.parse(sessionStorage.getItem(key));
+        }
+    }
+}

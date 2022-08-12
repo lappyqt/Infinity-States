@@ -5,7 +5,7 @@
     box-sizing: border-box;
 }
 
-.search {
+.nav-search {
     width: 100%;
     height: auto;
     padding: 8px 10px 8px 35px;
@@ -18,5 +18,23 @@
     background-image: url('../../../img/search_dark.svg');
     background-repeat: no-repeat;
     background-size: 14px 14px;
-    background-position: 10px 9.5px;
+    background-position: 10px center;
+}
+
+.search {
+    max-width: 100%;
+    width: 100%;
+    padding: 10px 15px 10px 40px;
+    background-color: white;
+    border: 1px solid #aeaeae;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    outline: none;
+    box-sizing: border-box;
+    font-size: 14px;
+    font-family: var(--font-main);
+    background-image: url('../../../img/search_dark.svg');
+    background-repeat: no-repeat;
+    background-size: 14px 14px;
+    background-position: 15px center;
 }

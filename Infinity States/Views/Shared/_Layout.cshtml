@@ -10,12 +10,12 @@
     @await Html.PartialAsync("CssPartial")
     @RenderSection("styles", false)
     <link rel="shortcut icon" type="image/png" href="~/img/icon.png"/>
-    <script defer src="~/build/alpine.js"></script>
+    <script type="text/javascript" defer src="~/build/alpine.js"></script>
     <script defer src="~/build/components.js"></script>
     <title>@ViewBag.Title</title>
 </head>
 <body>
-    <nav x-data="{ accountModal: '', searchView: false }" x-init="accountModal = new DropdownModal('.dropdown-modal')" class="navbar">
+    <nav x-data="{ accountModal: '', searchView: false }" x-init="accountModal = new Public.DropdownModal('.dropdown-modal')" class="navbar">
         <div class="nav-items">
             <p class="top-title"><a href="/">Infinity States</a></p>
             <div x-cloak class="links" :class="{ 'hidden': searchView }">
@@ -29,8 +29,8 @@
 
             <section x-show="searchView" x-transition:enter.duration.250ms x-on:mousedown.outside="searchView = false" class="search-container">
                 <input x-cloak x-on:keyup.escape="searchView = false" 
-                x-on:keyup.enter="window.location = window.origin + '/search?req=' + $el.value; $el.value = ''"
-                type="text" class="search" placeholder="Your search request...">
+                x-on:keyup.enter="window.location = window.origin + '/search?q=' + $el.value; $el.value = ''"
+                type="text" class="nav-search" placeholder="Your search request...">
             </section>
         </div>
 
@@ -59,7 +59,7 @@
             </div>
         </section>
     </nav>
-    <script src="~/build/app.js" type="text/javascript"></script>
+    <script src="~/bundle.min.js" type="text/javascript"></script>
 
     @RenderBody()
     @await Html.PartialAsync("ScriptsPartial")

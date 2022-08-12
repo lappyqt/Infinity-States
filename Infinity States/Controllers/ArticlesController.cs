@@ -122,19 +122,19 @@ namespace Infinity_States.Controllers
         }
 
         [HttpGet]
-        public async Task<List<Article>> Filter(int value)
+        public async Task<IEnumerable<Article>> Filter(int value)
         {
             return await _articlesRepository.GetArticlesWithFilter(value);
         }
 
-        [HttpPost]
+        [HttpPost] // TODO: If image is not change not update it
         public async Task<IActionResult> Update(int id, IFormFile poster, string title, string content)
         {
             var article = await _articlesRepository.GetArticle(id);
 
             string path = $"{_enviroment.WebRootPath}\\files\\images\\{poster.FileName}";
             string previousPosterPath = $"{_enviroment.ContentRootPath}\\wwwroot\\{article.Poster}";
-            await _fileHandling.UploadFileWithDeletingPrevious(poster, path, previousPosterPath);
+            // Not WORK if ($"/files/images{poster.FileName}" != article.Poster) { await _fileHandling.UploadFileWithDeletingPrevious(poster, path, previousPosterPath); }
 
             MutableArticleData articleData = new MutableArticleData(poster, title, content);
             await _articlesRepository.Update(id, articleData);

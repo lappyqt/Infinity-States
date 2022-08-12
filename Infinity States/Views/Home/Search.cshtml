@@ -1,0 +1,26 @@
+@using Infinity_States.Data
+@model IndexViewModel
+
+@{
+    Microsoft.Extensions.Primitives.StringValues query;
+    Context.Request.Query.TryGetValue("q", out query); 
+}
+
+<div class="search-results">    
+    <form method="get" action="/search">
+        @*Html.AntiForgeryToken()*@
+        <input name="q" autocomplete="off" value="@query" placeholder="Search only what interests you" x-on:keyup.enter="this.submit()" class="search" type="text">
+    </form>
+
+    <content-type-select types="Articles; Posts; Authors"></content-type-select>
+</div>
+
+<div class="articles">
+    @await Component.InvokeAsync("ArticleList")
+</div>
+
+<style>
+    .articles {
+        margin-top: 40px;
+    }
+</style>
